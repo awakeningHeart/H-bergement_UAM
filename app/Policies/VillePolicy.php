@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Policies;
+
+class VillePolicy extends PermissionPolicy
+{
+    protected string $voir = 'referentiels.voir';
+
+    protected string $gerer = 'referentiels.gerer';
+}

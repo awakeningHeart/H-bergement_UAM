@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - database/factories
+        - database/seeders
+    level: 6
+    tmpDir: .phpstan.cache
+    ignoreErrors:
+        # Génériques Eloquent (relations, scopes, HasFactory) : non typés volontairement dans le projet.
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
