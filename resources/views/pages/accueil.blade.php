@@ -141,10 +141,7 @@
             <h2>{{ __('site.suivi.titre') }}</h2>
             <p>{{ __('site.suivi.texte') }}</p>
         </div>
-        <div class="suivi__form">
-            <input type="tel" inputmode="tel" autocomplete="tel" placeholder="{{ __('site.suivi.placeholder') }}" aria-label="{{ __('site.recherche.ville') }}" disabled>
-            <button type="button" class="btn-deep" disabled title="{{ __('site.en_bientot') }}">{{ __('site.suivi.bouton') }}</button>
-        </div>
+        <livewire:suivi-telephone />
     </div>
 </section>
 @endsection

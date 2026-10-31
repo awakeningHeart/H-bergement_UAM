@@ -64,3 +64,13 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Visuels d'accueil** : paramètres `image_accueil` et `image_experience` (chemin sur le disque public) ; sans valeur, fond bleu nuit / emplacement neutre. Photos de sites et chambres via le back-office (`php artisan storage:link` requis).
 - **Carte** : Leaflet (npm) + tuiles CARTO clair (OpenStreetMap), sans clé API. Le texte public est dans `lang/fr/site.php` (préparation i18n anglais, P2).
 - **Non vérifié visuellement** dans un navigateur : le rendu a été contrôlé par tests et réponses HTTP ; une relecture visuelle par le chef est à prévoir.
+
+## D08 — Choix du lot 3
+- **OTP uniquement pour un client connu** (docs/04) : un nouveau numéro n'en reçoit pas ; un numéro connu doit valider le code avant toute réservation (preuve en session, 30 min), car la réservation met à jour son identité. Un numéro inconnu reçoit la même réponse sans SMS (pas d'énumération).
+- **Heure de départ** : la fenêtre 2 ne demande pas d'heure de départ ; le départ est fixé à l'heure limite (12:00). Un départ tardif relève du gestionnaire. Quantité de chaque repas = nombre de nuitées (comme dans le design).
+- **Modal Livewire** : appelle directement les services (même logique que l'API JSON, mêmes limites de débit). Les routes JSON `/api/*` restent exposées et testées.
+- **Hold** : un navigateur = un hold ; changer les dates en fenêtre 2 repose le hold. Jeton en clair seulement côté navigateur, empreinte SHA-256 en base.
+- **Suivi** : le jeton du lien n'est connu que du SMS et de l'écran de confirmation ; seule son empreinte est stockée. Annulation autorisée pour En attente et Confirmée.
+- **Fiche PDF** : lien signé (2 h à la confirmation, 30 min depuis le suivi). La « Facture PDF » du design est reportée au lot 4 (émission des factures).
+- **Non encore couvert** : pas de SMS de refus (lot 4, workflow) ; pas d'envoi d'e-mail de confirmation.
+- **Tuiles de carte** : OpenStreetMap standard, avec attribution (usage faible volume ; prévoir un fournisseur de tuiles dédié si le trafic augmente).

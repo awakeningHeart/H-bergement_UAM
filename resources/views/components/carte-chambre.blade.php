@@ -25,7 +25,7 @@
                 <div class="price-label">{{ __('site.chambres.a_partir') }}</div>
                 <div class="price">{{ \App\Support\Format::nombre($tarif->prix_nuit) }} <small>{{ __('site.chambres.par_nuit') }}</small></div>
             </div>
-            <a class="btn-deep" href="{{ $lien }}" data-reserver="{{ $chambre->id }}">{{ __('site.chambres.reserver') }}</a>
+            <a class="btn-deep" href="{{ $lien }}" data-reserver="{{ $chambre->id }}" data-arrivee="{{ $arrivee->toDateString() }}" data-depart="{{ $depart->toDateString() }}">{{ __('site.chambres.reserver') }}</a>
         </div>
     </div>
 </article>

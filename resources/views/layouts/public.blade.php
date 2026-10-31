@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body>
     <a href="#contenu" class="sr-only-focusable">{{ __('site.skip') }}</a>
@@ -18,5 +19,7 @@
         @yield('contenu')
     </main>
     @include('partials.pied')
+    <livewire:reservation-modal />
+    @livewireScripts
 </body>
 </html>

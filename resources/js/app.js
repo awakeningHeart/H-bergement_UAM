@@ -10,8 +10,8 @@ function initCarte() {
 
     const sites = JSON.parse(el.dataset.sites || '[]').filter((s) => s.lat !== null && s.lng !== null);
     const map = L.map(el, { scrollWheelZoom: false }).setView(sites.length ? [sites[0].lat, sites[0].lng] : [13.511, 2.1], 13);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '© OpenStreetMap © CARTO',
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
         maxZoom: 19,
     }).addTo(map);
 
@@ -97,7 +97,22 @@ function initGalerie() {
     });
 }
 
+/** « Réserver cette chambre » ouvre le modal Livewire ; sans JavaScript, le lien mène à la fiche de la chambre. */
+function initReservation() {
+    document.addEventListener('click', (e) => {
+        const bouton = e.target.closest('[data-reserver]');
+        if (!bouton || bouton.disabled || !window.Livewire) return;
+        e.preventDefault();
+        window.Livewire.dispatch('reservation-ouvrir', {
+            chambre: Number(bouton.dataset.reserver),
+            arrivee: bouton.dataset.arrivee,
+            depart: bouton.dataset.depart,
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    initReservation();
     initCarte();
     initRecherche();
     initGalerie();

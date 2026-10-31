@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property CarbonImmutable|Carbon $expire_le
+ * @property int $tentatives
+ */
 class OtpCode extends Model
 {
     public $timestamps = false;

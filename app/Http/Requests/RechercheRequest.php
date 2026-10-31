@@ -16,6 +16,12 @@ class RechercheRequest extends FormRequest
     /** @return array<string, array<int, mixed>> */
     public function rules(): array
     {
+        return self::regles();
+    }
+
+    /** @return array<string, array<int, mixed>> */
+    public static function regles(): array
+    {
         $aujourdhui = CarbonImmutable::now(config('uam.timezone'))->toDateString();
 
         return [

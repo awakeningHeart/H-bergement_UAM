@@ -7,6 +7,10 @@ use App\Models\Concerns\Audite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Repas $repas
+ * @property int $prix
+ */
 class TarifRepas extends Model
 {
     use Audite, HasFactory;

@@ -1,0 +1,96 @@
+/* Suivi (téléphone + code) */
+.suivi__zone { min-width: min(100%, 440px); }
+.suivi__msg { margin: 12px 0 0; font-size: 14px; color: var(--gris); }
+.suivi__liste { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.suivi__liste-tete { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.suivi__liste-tete h3 { margin: 0; font-family: var(--display); font-weight: var(--dw); font-size: 28px; }
+.resume { background: #fff; padding: 22px 24px; display: flex; flex-direction: column; gap: 16px; }
+.resume__tete { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: start; }
+.resume__num { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--deep); }
+.resume__lieu { font-size: 14px; color: var(--gris); }
+.resume__liste { margin: 0; display: grid; gap: 10px; }
+.resume__liste div { display: grid; grid-template-columns: 140px 1fr; gap: 12px; font-size: 14px; }
+.resume__liste dt { color: var(--gris-2); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.resume__liste dd { margin: 0; }
+.resume__actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.statut { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; background: #eef4fc; color: var(--deep); }
+.statut--success { background: #e7f4ec; color: #14692f; }
+.statut--warning { background: #fdf3dc; color: #7a5200; }
+.statut--danger { background: #fdf1f2; color: #8f0a13; }
+.statut--gray { background: #eceef2; color: var(--gris); }
+.statut--info { background: #eef4fc; color: var(--deep); }
+
+/* Modal de réservation (780 px, plein écran sous 640 px) */
+.modal { position: fixed; inset: 0; z-index: 1000; background: rgba(6, 14, 32, .72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: clamp(0px, 3vw, 32px); }
+.modal__dialog { background: var(--fond); width: 100%; max-width: 780px; max-height: 100%; display: flex; flex-direction: column; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, .6); }
+.modal__head { background: var(--deep); color: #fff; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.modal__ctx { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; font-size: 13px; color: #c9d3e6; }
+.modal__ctx .dim { opacity: .4; }
+.modal__ctx .white { color: #fff; }
+.modal__room { font-family: var(--display); font-size: 20px; color: #fff; }
+.modal__tools { display: flex; gap: 18px; align-items: center; }
+.modal__timer { font-size: 12px; color: #f25a63; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.modal__link { background: transparent; border: 0; border-bottom: 1px solid var(--rouge); color: #fff; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; padding: 0 0 2px; }
+.modal__link--dark { color: var(--texte); }
+.modal__steps { padding: 22px 28px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.step { display: flex; flex-direction: column; gap: 10px; }
+.step__bar { height: 2px; background: var(--filet); }
+.step.is-on .step__bar { background: var(--rouge); }
+.step__label { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8a91a0; }
+.step.is-current .step__label { color: var(--texte); }
+.modal__body { padding: 28px; overflow-y: auto; flex: 1; }
+.modal__title { margin: 0 0 24px; font-family: var(--display); font-weight: var(--dw); font-size: 34px; }
+.modal__title--xl { font-size: 42px; line-height: 1.04; margin-bottom: 16px; }
+.modal__foot { padding: 18px 28px; border-top: 1px solid var(--filet); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.modal__back { background: transparent; border: 0; color: var(--gris); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; min-height: 44px; }
+.btn-cta-red { background: var(--rouge); color: #fff; border: 0; padding: 16px 30px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; min-height: 48px; }
+.btn-cta-red:hover { background: var(--deep); }
+.btn-cta-red[disabled] { opacity: .5; cursor: wait; }
+.alert { background: #fdf1f2; color: #8f0a13; border: 1px solid #f1c4c8; padding: 12px 16px; font-size: 14px; margin: 0 0 18px; }
+.field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.field .lbl, .lbl { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gris-2); }
+.lbl-dark { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.field input, .field select { border: 0; border-bottom: 1px solid #cfc5b3; background: transparent; font-size: 17px; padding: 8px 0; min-height: 44px; border-radius: 0; color: var(--texte); }
+.field--big input { font-family: var(--display); font-size: 22px; }
+.err { font-size: 13px; color: var(--rouge); }
+.hint { min-height: 24px; font-size: 13px; margin: 10px 0 18px; color: #8a91a0; }
+.hint--info { color: var(--bleu); }
+.hint--bad { color: var(--rouge); }
+.otp { background: #fff; padding: 18px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; }
+.otp__input { font-size: 24px !important; letter-spacing: .4em; }
+.otp__actions { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.grid-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px 28px; }
+.grid-fields--4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 28px; }
+.big-number { font-family: var(--display); font-size: 32px; color: var(--deep); line-height: 1; font-weight: 600; }
+.box { background: #fff; padding: 22px 24px; margin-bottom: 22px; }
+.box__row { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.box__row:last-child { margin-bottom: 0; }
+.seg { display: flex; }
+.seg button { border: 1px solid var(--deep); background: transparent; color: var(--texte); padding: 10px 18px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; min-height: 44px; }
+.seg button + button { border-left: 0; }
+.seg button.is-on { background: var(--deep); color: #fff; }
+.seg--full button { flex: 1; }
+.meals { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.meal { text-align: left; border: 1px solid var(--filet); background: #fff; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--texte); }
+.meal small { font-size: 12px; color: var(--gris-2); }
+.meal.is-on { border-color: var(--bleu); background: #eef4fc; }
+.box--total { margin-top: 22px; }
+.sum-row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; font-size: 14px; color: var(--gris); }
+.sum-row--sep { border-top: 1px solid var(--filet-2); margin-top: 6px; padding-top: 12px; color: var(--texte); }
+.sum-final { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 14px; border-top: 1px solid var(--deep); }
+.sum-final .big-number { font-size: 34px; }
+.check { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; line-height: 1.6; color: var(--gris); cursor: pointer; margin-top: 22px; }
+.check input { flex: none; width: 22px; height: 22px; margin-top: 2px; accent-color: var(--deep); }
+.signature { font-family: var(--display) !important; font-style: italic; font-size: 28px !important; }
+.done { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 12px 0; }
+.done__num { font-family: var(--display); font-size: 30px; color: var(--deep); font-weight: 600; }
+.done__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+
+@media (max-width: 640px) {
+    .modal { padding: 0; }
+    .modal__dialog { max-width: none; height: 100%; }
+    .modal__head, .modal__body, .modal__foot { padding-left: 18px; padding-right: 18px; }
+    .modal__steps { padding: 16px 18px 0; }
+    .step__label { font-size: 10px; letter-spacing: .08em; }
+    .resume__liste div { grid-template-columns: 1fr; gap: 2px; }
+}

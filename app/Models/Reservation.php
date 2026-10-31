@@ -6,12 +6,22 @@ use App\Enums\Motif;
 use App\Enums\Payeur;
 use App\Enums\StatutReservation;
 use App\Models\Concerns\Audite;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property StatutReservation $statut
+ * @property Motif $motif
+ * @property Payeur $payeur
+ * @property CarbonImmutable|Carbon $arrivee
+ * @property CarbonImmutable|Carbon $depart
+ * @property CarbonImmutable|Carbon|null $conditions_acceptees_le
+ */
 class Reservation extends Model
 {
     use Audite, HasFactory;
@@ -38,6 +48,7 @@ class Reservation extends Model
         ];
     }
 
+    /** @return BelongsTo<Client, $this> */
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
@@ -83,5 +94,27 @@ class Reservation extends Model
             ->whereIn('statut', array_map(fn (StatutReservation $s) => $s->value, StatutReservation::actifs()))
             ->where('arrivee', '<', $depart)
             ->where('depart', '>', $arrivee);
+    }
+
+    /** Jeton du QR code de la fiche : numéro + signature, vérifié par la route /admin/scan/{token}. */
+    public function tokenScan(): string
+    {
+        return $this->numero.'.'.self::signatureScan($this->numero);
+    }
+
+    public static function numeroDepuisScan(string $token): ?string
+    {
+        $position = strrpos($token, '.');
+        if ($position === false) {
+            return null;
+        }
+        $numero = substr($token, 0, $position);
+
+        return hash_equals(self::signatureScan($numero), substr($token, $position + 1)) ? $numero : null;
+    }
+
+    private static function signatureScan(string $numero): string
+    {
+        return substr(hash_hmac('sha256', 'scan:'.$numero, (string) config('app.key')), 0, 20);
     }
 }

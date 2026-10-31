@@ -77,7 +77,7 @@
                         <strong>{{ \App\Support\Format::fcfa($ht) }}</strong>
                     </div>
                 @endif
-                <button type="button" class="btn-deep" data-reserver="{{ $chambre->id }}" @disabled(! $disponible || $nuitees < 1)>{{ __('site.chambres.reserver') }}</button>
+                <button type="button" class="btn-deep" data-reserver="{{ $chambre->id }}" data-arrivee="{{ $arrivee->toDateString() }}" data-depart="{{ $depart->toDateString() }}" @disabled(! $disponible || $nuitees < 1)>{{ __('site.chambres.reserver') }}</button>
             @endif
             <a href="{{ route('site', $site) }}">← {{ __('site.fiche.retour') }}</a>
         </aside>

@@ -48,7 +48,7 @@ class PricingService
 
     /**
      * @param  array<string, int>  $repas  quantités par repas (clé = valeur de l'enum Repas)
-     * @return array{nuitees: int, prix_nuit: int, lignes: list<array{libelle: string, quantite: int, prix_unitaire: int, montant: int}>, montant_ht: int, montant_tva: int, montant_ttc: int}
+     * @return array{nuitees: int, prix_nuit: int, lignes: list<array{libelle: string, repas: ?string, quantite: int, prix_unitaire: int, montant: int}>, montant_ht: int, montant_tva: int, montant_ttc: int}
      */
     public function devis(Chambre $chambre, CarbonInterface $arrivee, CarbonInterface $depart, array $repas = []): array
     {
@@ -64,6 +64,7 @@ class PricingService
 
         $lignes = [[
             'libelle' => 'Nuitées',
+            'repas' => null,
             'quantite' => $nuitees,
             'prix_unitaire' => $tarif->prix_nuit,
             'montant' => $nuitees * $tarif->prix_nuit,
@@ -78,6 +79,7 @@ class PricingService
             $prix = (int) (TarifRepas::query()->where('repas', $type->value)->value('prix') ?? 0);
             $lignes[] = [
                 'libelle' => $type->libelle(),
+                'repas' => $type->value,
                 'quantite' => $quantite,
                 'prix_unitaire' => $prix,
                 'montant' => $quantite * $prix,
