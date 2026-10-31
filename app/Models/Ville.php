@@ -16,6 +16,7 @@ class Ville extends Model
 
     protected $guarded = [];
 
+    /** @return HasMany<Site, $this> */
     public function sites(): HasMany
     {
         return $this->hasMany(Site::class);

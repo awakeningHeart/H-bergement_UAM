@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Chambres\Schemas;
 
 use App\Models\Site;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -31,6 +33,27 @@ class ChambreForm
                 TextInput::make('etage')->label('Étage')->maxLength(20),
                 Textarea::make('description')->label('Description')->columnSpanFull(),
                 Toggle::make('actif')->label('Chambre active')->default(true),
+                Repeater::make('photos')
+                    ->label('Photos')
+                    ->relationship()
+                    ->schema([
+                        FileUpload::make('chemin')
+                            ->label('Image')
+                            ->image()
+                            ->disk('public')
+                            ->directory('photos')
+                            ->maxSize(4096)
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('1600')
+                            ->imageResizeTargetHeight('1200')
+                            ->required(),
+                    ])
+                    ->orderColumn('ordre')
+                    ->reorderable()
+                    ->addActionLabel('Ajouter une photo')
+                    ->defaultItems(0)
+                    ->grid(3)
+                    ->columnSpanFull(),
             ]);
     }
 }

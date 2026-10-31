@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Sites\Schemas;
 
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -36,6 +38,27 @@ class SiteForm
                     ->preload()
                     ->columnSpanFull(),
                 Toggle::make('actif')->label('Site actif')->default(true),
+                Repeater::make('photos')
+                    ->label('Photos')
+                    ->relationship()
+                    ->schema([
+                        FileUpload::make('chemin')
+                            ->label('Image')
+                            ->image()
+                            ->disk('public')
+                            ->directory('photos')
+                            ->maxSize(4096)
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('1600')
+                            ->imageResizeTargetHeight('1200')
+                            ->required(),
+                    ])
+                    ->orderColumn('ordre')
+                    ->reorderable()
+                    ->addActionLabel('Ajouter une photo')
+                    ->defaultItems(0)
+                    ->grid(3)
+                    ->columnSpanFull(),
             ]);
     }
 }

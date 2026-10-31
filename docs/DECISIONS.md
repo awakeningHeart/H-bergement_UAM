@@ -56,3 +56,11 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
   - Message de confirmation du design (« envoyée par e-mail ») : la confirmation passe par SMS (e-mail en complément si renseigné).
   - **Motifs de séjour (validé)** : 5 motifs (mission, colloque, jury, enseignant_visiteur, autre) ; colonne `reservations.motif` étendue dans la migration (aucune donnée en production). Le sélecteur « Personnes » filtre les chambres par capacité.
   - **Logo (validé)** : `logo-hebergement-uam.png` partout (site public, back-office, PDF) ; le logo du handoff n'est pas utilisé.
+
+## D07 — Choix du lot 2
+- **Disponibilité** : les bornes d'un séjour sont normalisées à l'heure de départ (12:00 à Niamey) ; un départ le matin de J ne bloque donc pas une arrivée l'après-midi de J, mais un départ tardif (> 12:00) bloque le jour J (RG05). Les holds (dates) sont comparés au jour près. Une chambre sans tarif en vigueur n'est pas proposée.
+- **Réservation** : les boutons « Réserver cette chambre » mènent à la fiche chambre (attribut `data-reserver`) ; le modal en 3 fenêtres est branché au lot 3. Le formulaire « Retrouver une réservation » est affiché mais désactivé jusqu'au lot 3 (OTP).
+- **API** : routes dans `routes/web.php` sous `/api` avec le limiteur `catalogue` (60/min/IP) ; pas de fichier `routes/api.php` (sessions et CSRF pour les POST du lot 3).
+- **Visuels d'accueil** : paramètres `image_accueil` et `image_experience` (chemin sur le disque public) ; sans valeur, fond bleu nuit / emplacement neutre. Photos de sites et chambres via le back-office (`php artisan storage:link` requis).
+- **Carte** : Leaflet (npm) + tuiles CARTO clair (OpenStreetMap), sans clé API. Le texte public est dans `lang/fr/site.php` (préparation i18n anglais, P2).
+- **Non vérifié visuellement** dans un navigateur : le rendu a été contrôlé par tests et réponses HTTP ; une relecture visuelle par le chef est à prévoir.

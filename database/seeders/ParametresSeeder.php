@@ -16,12 +16,15 @@ class ParametresSeeder extends Seeder
             'duree_hold_minutes' => config('uam.hold_ttl_minutes'),
             'expiration_attente_heures' => config('uam.pending_expiry_hours'),
             'delai_paiement_heures' => config('uam.payment_deadline_hours'),
-            'facturation_adresse' => '[À renseigner]',
-            'facturation_telephone' => '[À renseigner]',
-            'facturation_email' => '[À renseigner]',
-            'facturation_nif' => '[À renseigner]',
+            'facturation_adresse' => 'BP 10896/237 Niamey, Niger',
+            'facturation_telephone' => '+227 20 31 55 31',
+            'facturation_email' => 'rectorat@uam.edu.ne',
+            'facturation_nif' => '5713',
             'banque_nom' => '[À renseigner]',
             'banque_iban' => '[À renseigner]',
+            // Chemins (disque public) des visuels de la page d'accueil ; vides = fond par défaut.
+            'image_accueil' => '',
+            'image_experience' => '',
             'conditions_generales' => '[À renseigner] Conditions générales de séjour et de réservation.',
         ];
 

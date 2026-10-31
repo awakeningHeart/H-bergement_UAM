@@ -31,6 +31,7 @@ class Chambre extends Model
         return $this->belongsTo(Site::class);
     }
 
+    /** @return BelongsTo<TypeChambre, $this> */
     public function type(): BelongsTo
     {
         return $this->belongsTo(TypeChambre::class, 'type_chambre_id');

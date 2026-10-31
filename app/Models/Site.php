@@ -25,11 +25,13 @@ class Site extends Model
         return ['actif' => 'boolean'];
     }
 
+    /** @return BelongsTo<Ville, $this> */
     public function ville(): BelongsTo
     {
         return $this->belongsTo(Ville::class);
     }
 
+    /** @return HasMany<Chambre, $this> */
     public function chambres(): HasMany
     {
         return $this->hasMany(Chambre::class);

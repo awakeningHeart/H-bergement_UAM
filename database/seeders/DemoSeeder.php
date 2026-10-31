@@ -13,52 +13,65 @@ use App\Models\User;
 use App\Models\Ville;
 use Illuminate\Database\Seeder;
 
-/** Données de démonstration fictives : tout ce qui est institutionnel est marqué [À renseigner]. */
+/**
+ * Données de démonstration (reprises du design de référence) : à valider et remplacer par l'UAM.
+ * Les informations institutionnelles non connues sont marquées [À renseigner].
+ */
 class DemoSeeder extends Seeder
 {
     public function run(): void
     {
-        $niamey = Ville::firstOrCreate(['slug' => 'niamey'], ['nom' => 'Niamey', 'latitude' => 13.5116, 'longitude' => 2.1254]);
-        $ville2 = Ville::firstOrCreate(['slug' => 'ville-2'], ['nom' => '[Ville 2 - À renseigner]', 'latitude' => 13.0500, 'longitude' => 3.2000]);
+        $villes = [];
+        foreach ([
+            ['niamey', 'Niamey', 13.5116, 2.1254],
+            ['dosso', 'Dosso', 13.0490, 3.1937],
+            ['tillaberi', 'Tillabéri', 14.2111, 1.4536],
+            ['say', 'Say', 13.1000, 2.3667],
+        ] as [$slug, $nom, $lat, $lng]) {
+            $villes[$slug] = Ville::firstOrCreate(['slug' => $slug], ['nom' => $nom, 'latitude' => $lat, 'longitude' => $lng]);
+        }
 
-        $sites = [
-            ['ville' => $niamey, 'slug' => 'site-1', 'nom' => '[Site 1 - À renseigner]', 'lat' => 13.5290, 'lng' => 2.0980],
-            ['ville' => $niamey, 'slug' => 'site-2', 'nom' => '[Site 2 - À renseigner]', 'lat' => 13.5100, 'lng' => 2.1100],
-            ['ville' => $ville2, 'slug' => 'site-3', 'nom' => '[Site 3 - À renseigner]', 'lat' => 13.0450, 'lng' => 3.1950],
-        ];
+        $simple = TypeChambre::firstOrCreate(['libelle' => 'Chambre Simple'], ['capacite' => 1, 'equipements' => ['Climatisation', 'Salle de bain privée', 'Wi-Fi']]);
+        $double = TypeChambre::firstOrCreate(['libelle' => 'Chambre Double Supérieure'], ['capacite' => 2, 'equipements' => ['Climatisation', 'Salle de bain privée', 'Bureau']]);
+        $suite = TypeChambre::firstOrCreate(['libelle' => 'Suite Rectorat'], ['capacite' => 2, 'equipements' => ['Salon privé', 'Climatisation', 'Terrasse']]);
 
-        $simple = TypeChambre::firstOrCreate(['libelle' => 'Chambre simple'], ['capacite' => 1, 'equipements' => ['Climatisation', 'Wi-Fi', 'Douche']]);
-        $double = TypeChambre::firstOrCreate(['libelle' => 'Chambre double'], ['capacite' => 2, 'equipements' => ['Climatisation', 'Wi-Fi', 'Douche', 'Télévision']]);
-        $suite = TypeChambre::firstOrCreate(['libelle' => 'Suite'], ['capacite' => 3, 'equipements' => ['Climatisation', 'Wi-Fi', 'Douche', 'Télévision', 'Salon']]);
-
-        // Tarifs de démonstration par type (valeurs fictives à remplacer).
-        foreach ([[$simple, 15000], [$double, 25000], [$suite, 40000]] as [$type, $prix]) {
+        // Tarifs de démonstration par type (valeurs du design, à remplacer par les tarifs officiels).
+        foreach ([[$simple, 18000], [$double, 25000], [$suite, 40000]] as [$type, $prix]) {
             Tarif::firstOrCreate(
                 ['type_chambre_id' => $type->id, 'chambre_id' => null],
                 ['prix_nuit' => $prix, 'date_debut' => '2026-01-01'],
             );
         }
 
-        foreach ([[Repas::PetitDejeuner, 2000], [Repas::Dejeuner, 4000], [Repas::Diner, 4000]] as [$repas, $prix]) {
+        foreach ([[Repas::PetitDejeuner, 2500], [Repas::Dejeuner, 5000], [Repas::Diner, 5000]] as [$repas, $prix]) {
             TarifRepas::firstOrCreate(['repas' => $repas], ['prix' => $prix]);
         }
 
+        $sites = [
+            ['niamey', 'maison-hotes-campus', "Maison d'hôtes du Campus", 'Campus universitaire, rive droite', 13.4997, 2.0946],
+            ['niamey', 'residence-rectorat', 'Résidence du Rectorat', 'Rive droite, près du Rectorat', 13.5045, 2.1012],
+            ['niamey', 'villa-des-hotes', 'Villa des Hôtes', 'Quartier Plateau', 13.5232, 2.1058],
+            ['dosso', 'dosso-site-regional', '[Site régional de Dosso - À renseigner]', '[À renseigner]', 13.0490, 3.1937],
+            ['tillaberi', 'tillaberi-site-regional', '[Site régional de Tillabéri - À renseigner]', '[À renseigner]', 14.2111, 1.4536],
+            ['say', 'say-site-regional', '[Site régional de Say - À renseigner]', '[À renseigner]', 13.1000, 2.3667],
+        ];
+
         $sitesCrees = [];
-        foreach ($sites as $s) {
-            $site = Site::firstOrCreate(['slug' => $s['slug']], [
-                'ville_id' => $s['ville']->id,
-                'nom' => $s['nom'],
-                'adresse' => '[À renseigner]',
-                'latitude' => $s['lat'],
-                'longitude' => $s['lng'],
+        foreach ($sites as [$ville, $slug, $nom, $adresse, $lat, $lng]) {
+            $site = Site::firstOrCreate(['slug' => $slug], [
+                'ville_id' => $villes[$ville]->id,
+                'nom' => $nom,
+                'adresse' => $adresse,
+                'latitude' => $lat,
+                'longitude' => $lng,
                 'description' => '[À renseigner] Description du site.',
                 'telephone' => null,
                 'actif' => true,
             ]);
-            foreach ([['01', $simple], ['02', $simple], ['03', $double], ['04', $double], ['05', $suite]] as [$numero, $type]) {
+            foreach ([['101', $simple, '1'], ['102', $simple, '1'], ['201', $double, '2'], ['202', $double, '2'], ['301', $suite, '3']] as [$numero, $type, $etage]) {
                 Chambre::firstOrCreate(['site_id' => $site->id, 'numero' => $numero], [
                     'type_chambre_id' => $type->id,
-                    'etage' => $numero <= '02' ? '0' : '1',
+                    'etage' => $etage,
                     'description' => '[À renseigner]',
                     'actif' => true,
                 ]);
@@ -66,7 +79,9 @@ class DemoSeeder extends Seeder
             $sitesCrees[] = $site;
         }
 
-        Organisme::firstOrCreate(['nom' => '[Organisme de démonstration - À renseigner]'], ['contact' => '[À renseigner]']);
+        Organisme::firstOrCreate(['nom' => "Ministère de l'Enseignement supérieur"], ['contact' => '[À renseigner]']);
+        Organisme::firstOrCreate(['nom' => 'Projet partenaire'], ['contact' => '[À renseigner]']);
+        Organisme::firstOrCreate(['nom' => 'Université partenaire'], ['contact' => '[À renseigner]']);
 
         // Comptes de démonstration (mot de passe aléatoire : à réinitialiser par l'admin).
         $gestionnaire = User::firstOrCreate(['email' => 'gestionnaire@uam.local'], [
