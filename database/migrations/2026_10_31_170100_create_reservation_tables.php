@@ -37,7 +37,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('clients');
             $table->foreignId('chambre_id')->constrained('chambres');
             $table->foreignId('organisme_id')->nullable()->constrained('organismes');
-            $table->enum('motif', ['mission', 'autres']);
+            $table->enum('motif', ['mission', 'colloque', 'jury', 'enseignant_visiteur', 'autre']);
             $table->dateTime('arrivee');
             $table->dateTime('depart');
             $table->unsignedSmallInteger('nuitees');

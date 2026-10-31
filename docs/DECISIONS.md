@@ -54,5 +54,5 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
   - Coordonnées du design (tél. +227 20 31 55 31, rectorat@uam.edu.ne, BP 10896/237, NIF 5713) reprises comme valeurs initiales des `parametres`, à faire valider.
   - Villes du design (Niamey, Dosso, Tillabéri, Say) et sites/chambres du design : données de démonstration, à valider.
   - Message de confirmation du design (« envoyée par e-mail ») : la confirmation passe par SMS (e-mail en complément si renseigné).
-  - Le design propose 5 motifs de séjour (Mission, Colloque, Jury, Enseignant visiteur, Autre) et un sélecteur « Personnes » ; le modèle de données n'a que mission/autres : en attente de confirmation.
-  - Deux logos : `logo-hebergement-uam.png` (validé par le chef, utilisé en back-office/PDF) et `logo-uam-transparent.png` (handoff, site public) : en attente de confirmation.
+  - **Motifs de séjour (validé)** : 5 motifs (mission, colloque, jury, enseignant_visiteur, autre) ; colonne `reservations.motif` étendue dans la migration (aucune donnée en production). Le sélecteur « Personnes » filtre les chambres par capacité.
+  - **Logo (validé)** : `logo-hebergement-uam.png` partout (site public, back-office, PDF) ; le logo du handoff n'est pas utilisé.
