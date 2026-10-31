@@ -46,3 +46,13 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Tests** : base MySQL dédiée `uam_hebergement_test` (même moteur que la production, nécessaire pour `lockForUpdate()`).
 - **Larastan** : niveau 6 avec les identifiants `missingType.generics` / `missingType.iterableValue` désactivés dans `phpstan.neon` (génériques Eloquent).
 - **Traductions** : Filament fournit le français ; les fichiers `lang/fr` applicatifs (validation, auth) restent à ajouter au lot 3.
+
+## D06 — Design de référence du handoff (31/10/2026)
+- La maquette de référence (hors dépôt) devient la référence visuelle du site public (lots 2-3) et du modal ; voir `docs/05-ui-guidelines.md`. Le back-office Filament garde le thème rouge/noir.
+- Écarts entre le design et le cahier des charges, traités par défaut :
+  - TVA « 19 % » affichée dans le design = valeur de démonstration ; le taux reste le paramètre `tva` (0 % par défaut tant que l'UAM n'a pas confirmé).
+  - Coordonnées du design (tél. +227 20 31 55 31, rectorat@uam.edu.ne, BP 10896/237, NIF 5713) reprises comme valeurs initiales des `parametres`, à faire valider.
+  - Villes du design (Niamey, Dosso, Tillabéri, Say) et sites/chambres du design : données de démonstration, à valider.
+  - Message de confirmation du design (« envoyée par e-mail ») : la confirmation passe par SMS (e-mail en complément si renseigné).
+  - Le design propose 5 motifs de séjour (Mission, Colloque, Jury, Enseignant visiteur, Autre) et un sélecteur « Personnes » ; le modèle de données n'a que mission/autres : en attente de confirmation.
+  - Deux logos : `logo-hebergement-uam.png` (validé par le chef, utilisé en back-office/PDF) et `logo-uam-transparent.png` (handoff, site public) : en attente de confirmation.
