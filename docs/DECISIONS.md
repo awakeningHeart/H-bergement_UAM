@@ -30,3 +30,6 @@
 - PHP 8.4.27 NTS installé via winget (extensions curl, fileinfo, gd, intl, mbstring, openssl, pdo_mysql, zip, sodium activées dans php.ini). Composer 2.11 via `composer.phar` (hors admin).
 - Laravel 13.39.0 initialisé le 31/10/2026 ; `.env.example` du kit conservé (non écrasé).
 - **MySQL 8 non encore installé** : à fournir (conteneur Docker conseillé) avant `migrate` au lot 1. Aucun driver SQLite actif.
+
+## D04 — MySQL local
+Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `127.0.0.1:3306` uniquement, mot de passe root aléatoire stocké dans `.env` (non versionné). utf8mb4, fuseau serveur UTC.
