@@ -207,8 +207,8 @@ input:focus, select:focus { outline: none; border-color: var(--bleu) !important;
 .panel .search label { border-bottom: 1px solid var(--filet); }
 .panel .search label:nth-child(2n) { border-right: 0; }
 .panel .search .search__go { grid-column: 1 / -1; padding: 16px; }
-.status { padding: 14px 18px; font-size: 14px; border-left: 3px solid var(--bleu); background: #eef4fc; }
-.status--ko { border-color: var(--rouge); background: #fdf1f2; }
+.status { padding: 14px 18px; font-size: 14px; border: 1px solid #cfdff3; background: #eef4fc; color: var(--deep); }
+.status--ko { border-color: #f1c4c8; background: #fdf1f2; color: #8f0a13; }
 .sum { display: flex; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--gris); }
 .sum strong { color: var(--deep); font-family: var(--display); font-size: 30px; font-weight: 600; }
 .block-title { margin: 0 0 14px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
