@@ -1,0 +1,15 @@
+# 07 — Checklist de recette
+- [ ] Recherche ville → site → chambre fonctionne, indisponibles exclues
+- [ ] Téléphone en premier champ ; lookup renvoie seulement `{known}`
+- [ ] OTP : expiration 5 min, 3 tentatives, 3 envois/10 min
+- [ ] Chambre préremplie en lecture seule ; « Changer de chambre » libère le hold
+- [ ] Deux navigateurs sur la même chambre/dates : un seul réussit
+- [ ] Nuitées/HT/TVA/TTC corrects (départ après 12:00 = nuitée en plus)
+- [ ] N° de fiche séquentiel sans doublon sous concurrence
+- [ ] PDF avec QR ; scan ouvre la fiche pour le personnel
+- [ ] Suivi client par téléphone+OTP et par lien
+- [ ] Workflow statuts + expirations (24 h) + no-show + hold 15 min via scheduler
+- [ ] Gestionnaire limité à ses sites ; Direction en lecture seule
+- [ ] Facture immuable, avoir fonctionnel
+- [ ] Journal d'audit, export Excel, tableau de bord
+- [ ] Mobile 360 px OK, tests Pest verts, pint et phpstan propres
