@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class PaiementResource extends Resource
@@ -31,6 +32,17 @@ class PaiementResource extends Resource
     protected static ?string $modelLabel = 'paiement';
 
     protected static ?string $pluralModelLabel = 'paiements';
+
+    /** Un paiement n'est ni créé ni modifié ici : il s'enregistre depuis la fiche de réservation. */
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

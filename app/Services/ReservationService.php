@@ -7,11 +7,11 @@ use App\Enums\Payeur;
 use App\Enums\Repas;
 use App\Enums\StatutReservation;
 use App\Exceptions\ReservationException;
+use App\Jobs\EnvoyerSms;
 use App\Models\Chambre;
 use App\Models\Client;
 use App\Models\Reservation;
 use App\Models\Sequence;
-use App\Services\Sms\SmsGateway;
 use App\Support\Telephone;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\UniqueConstraintViolationException;
@@ -28,7 +28,7 @@ class ReservationService
         private readonly AvailabilityService $disponibilites,
         private readonly HoldService $holds,
         private readonly PricingService $tarification,
-        private readonly SmsGateway $sms,
+        private readonly ReservationWorkflow $workflow,
     ) {}
 
     public static function empreinteSuivi(string $jeton): string
@@ -186,7 +186,7 @@ class ReservationService
     private function notifierCreation(Reservation $reservation, string $jeton): void
     {
         $reservation->loadMissing('client');
-        $this->sms->envoyer($reservation->client->telephone, __('reservation.sms.confirmation', [
+        EnvoyerSms::dispatch($reservation->client->telephone, __('reservation.sms.confirmation', [
             'numero' => $reservation->numero,
             'lien' => route('suivi', $jeton),
         ]));
@@ -199,7 +199,8 @@ class ReservationService
             throw new ReservationException(__('reservation.erreurs.annulation_impossible'));
         }
 
-        $reservation->update(['statut' => StatutReservation::Annulee]);
+        // Annulation demandée par le client : journalisée, sans SMS (il vient de la demander).
+        $this->workflow->transitionner($reservation, StatutReservation::Annulee, notifier: false);
     }
 
     /** @return array{0: CarbonImmutable, 1: CarbonImmutable} arrivée à l'heure saisie, départ à l'heure limite (heure de Niamey). */

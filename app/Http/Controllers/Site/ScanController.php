@@ -19,6 +19,6 @@ class ScanController extends Controller
         $reservation = Reservation::query()->where('numero', $numero)->firstOrFail();
         Gate::authorize('view', $reservation);
 
-        return redirect(ReservationResource::getUrl('edit', ['record' => $reservation]));
+        return redirect(ReservationResource::getUrl(auth()->user()->can('update', $reservation) ? 'edit' : 'view', ['record' => $reservation]));
     }
 }

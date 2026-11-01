@@ -14,5 +14,10 @@ class DatabaseSeeder extends Seeder
             ParametresSeeder::class,
             DemoSeeder::class,
         ]);
+
+        // Réservations fictives : jamais en production.
+        if (! app()->isProduction()) {
+            $this->call(DemoReservationsSeeder::class);
+        }
     }
 }

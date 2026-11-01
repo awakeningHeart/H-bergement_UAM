@@ -4,6 +4,34 @@ return [
     'sms' => [
         'otp' => 'UAM Hébergement : votre code est :code (valable :minutes min). Ne le communiquez à personne.',
         'confirmation' => 'UAM Hébergement : demande n° :numero reçue. Suivi et annulation : :lien',
+        'confirmee' => 'UAM Hébergement : votre réservation n° :numero est confirmée. Présentez votre fiche à l\'accueil.',
+        'refusee' => 'UAM Hébergement : votre demande n° :numero n\'a pas pu être acceptée.:motif',
+        'expiree' => 'UAM Hébergement : votre demande n° :numero a expiré faute de réponse. Vous pouvez en faire une nouvelle.',
+        'annulee' => 'UAM Hébergement : votre réservation n° :numero a été annulée.',
+    ],
+
+    'workflow' => [
+        'interdit' => 'Vous n\'avez pas le droit d\'effectuer cette action.',
+        'transition' => 'Passage impossible de « :de » à « :vers ».',
+        'journal' => 'Statut : :de → :vers',
+        'confirmee' => 'Réservation confirmée.',
+        'refusee' => 'Réservation refusée.',
+        'en_cours' => 'Arrivée enregistrée : clés remises.',
+        'terminee' => 'Départ enregistré : séjour terminé.',
+        'non_presente' => 'Marquée comme non présentée : la chambre est libérée.',
+        'annulee' => 'Réservation annulée.',
+    ],
+
+    'factures' => [
+        'deja_emise' => 'Une facture est déjà émise pour cette réservation : corrigez-la par un avoir.',
+        'deja_avoir' => 'Cette facture a déjà été annulée par un avoir.',
+        'avoir_sur_avoir' => 'Un avoir ne peut pas faire l\'objet d\'un avoir.',
+    ],
+
+    'paiements' => [
+        'montant_invalide' => 'Le montant doit être supérieur à zéro.',
+        'statut_invalide' => 'Aucun paiement n\'est possible pour une réservation dans ce statut.',
+        'depasse_solde' => 'Le montant dépasse le solde dû (:solde).',
     ],
 
     'erreurs' => [

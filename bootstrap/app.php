@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnTetesSecurite;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [EnTetesSecurite::class]);
         // Le personnel non connecté (ex. scan d'un QR code) est renvoyé vers la connexion du back-office.
         $middleware->redirectGuestsTo(fn () => route('filament.admin.auth.login'));
     })

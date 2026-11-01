@@ -15,6 +15,13 @@
             <dd>{{ $reservation->arrivee->setTimezone($tz)->format('d/m/Y H:i') }} → {{ $reservation->depart->setTimezone($tz)->format('d/m/Y H:i') }} ({{ trans_choice('site.fiche.nuitees', $reservation->nuitees, ['n' => $reservation->nuitees]) }})</dd></div>
         <div><dt>{{ __('reservation.suivi.montant') }}</dt><dd>{{ \App\Support\Format::fcfa($reservation->montant_ttc) }}</dd></div>
     </dl>
+    @if ($reservation->factures->isNotEmpty())
+        <div class="resume__actions">
+            @foreach ($reservation->factures as $facture)
+                <a class="btn-ghost" href="{{ \Illuminate\Support\Facades\URL::temporarySignedRoute('facture.pdf', now()->addMinutes(30), ['numero' => $facture->numero]) }}" target="_blank" rel="noopener">{{ $facture->type->libelle() }} {{ $facture->numero }}</a>
+            @endforeach
+        </div>
+    @endif
     @if (! empty($actions) && $peutAnnuler)
         <footer class="resume__actions">
             <a class="btn-ghost" href="{{ $reservation->getAttribute('lien_fiche') }}" target="_blank" rel="noopener">{{ __('reservation.suivi.fiche_pdf') }}</a>

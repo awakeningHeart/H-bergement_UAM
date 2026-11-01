@@ -36,3 +36,18 @@
 - Tests (110 au total) : OTP, fuite de données avant OTP, holds, concurrence, création, idempotence, PDF signé, suivi, scan, modal Livewire. Course réelle vérifiée : 6 processus simultanés sur la même chambre → 1 seul hold.
 ### Modifié
 - Tuiles de la carte : OpenStreetMap standard (les tuiles CARTO affichaient « API key required »).
+
+## [Lot 4 - Gestion et finition] - 2026-11-01
+### Ajouté
+- Workflow des statuts (`ReservationWorkflow`) : transitions contrôlées, journalisées (auteur, ancien et nouveau statut, motif), SMS de confirmation / refus / expiration / annulation par file d'attente (`EnvoyerSms`).
+- Fiche de réservation du back-office : actions Confirmer, Refuser (avec motif), Arrivée / remise des clés, Départ, Non présenté, Annuler, Émettre la facture, Enregistrer un paiement ; consultation en lecture seule pour la Direction.
+- Tâches planifiées : `reservations:expirer` (RG09), `reservations:non-presentes` (RG10), en plus de `holds:purger` et `otp:purger`.
+- Facturation (`FactureService`) : factures `FAC-AAAA-NNNNN` et avoirs `AV-AAAA-NNNNN`, contenu photographié à l'émission, PDF figé sur disque privé, facture à l'organisme (RG08), échéance à 48 h (RG07) ; avoir total depuis la fiche (RG12).
+- Paiements (`PaiementService`) : espèces, virement, chèque, mobile money ; plafonnés au solde ; non modifiables.
+- Tableau de bord (indicateurs, statuts, sites, revenus sur 6 mois) limité aux sites de l'utilisateur ; exports Excel des réservations et des paiements (filtres et RG11 respectés).
+- En-têtes de sécurité (`EnTetesSecurite`) : nosniff, cadre, Referrer-Policy, Permissions-Policy, HSTS en HTTPS, CSP sur le site public.
+- Réservations de démonstration couvrant tous les statuts (jamais en production).
+- Guides de déploiement et utilisateur, procès-verbal de recette, checklist complétée.
+### Modifié
+- Les liens de factures (PDF) sont disponibles dans la page de suivi du client.
+- Création manuelle de réservation et édition des paiements retirées du back-office ; réservations non supprimables.

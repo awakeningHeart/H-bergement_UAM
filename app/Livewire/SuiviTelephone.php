@@ -126,7 +126,7 @@ class SuiviTelephone extends Component
         }
 
         return Reservation::query()
-            ->with(['chambre.site', 'chambre.type'])
+            ->with(['chambre.site', 'chambre.type', 'factures'])
             ->whereHas('client', fn ($q) => $q->where('telephone', $this->telephoneVerifie))
             ->orderByDesc('id')
             ->get();

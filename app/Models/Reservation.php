@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property CarbonImmutable|Carbon $arrivee
  * @property CarbonImmutable|Carbon $depart
  * @property CarbonImmutable|Carbon|null $conditions_acceptees_le
+ * @property CarbonImmutable|Carbon|null $cles_remises_le
+ * @property CarbonImmutable|Carbon|null $depart_effectif_le
  */
 class Reservation extends Model
 {
@@ -41,6 +43,8 @@ class Reservation extends Model
             'arrivee' => 'datetime',
             'depart' => 'datetime',
             'conditions_acceptees_le' => 'datetime',
+            'cles_remises_le' => 'datetime',
+            'depart_effectif_le' => 'datetime',
             'nuitees' => 'integer',
             'montant_ht' => 'integer',
             'montant_tva' => 'integer',
@@ -54,26 +58,31 @@ class Reservation extends Model
         return $this->belongsTo(Client::class);
     }
 
+    /** @return BelongsTo<Chambre, $this> */
     public function chambre(): BelongsTo
     {
         return $this->belongsTo(Chambre::class);
     }
 
+    /** @return BelongsTo<Organisme, $this> */
     public function organisme(): BelongsTo
     {
         return $this->belongsTo(Organisme::class);
     }
 
+    /** @return HasMany<ReservationRepas, $this> */
     public function repas(): HasMany
     {
         return $this->hasMany(ReservationRepas::class);
     }
 
+    /** @return HasMany<Facture, $this> */
     public function factures(): HasMany
     {
         return $this->hasMany(Facture::class);
     }
 
+    /** @return HasMany<Paiement, $this> */
     public function paiements(): HasMany
     {
         return $this->hasMany(Paiement::class);
@@ -94,6 +103,34 @@ class Reservation extends Model
             ->whereIn('statut', array_map(fn (StatutReservation $s) => $s->value, StatutReservation::actifs()))
             ->where('arrivee', '<', $depart)
             ->where('depart', '>', $arrivee);
+    }
+
+    /**
+     * Solde dû en FCFA : total des factures (avoirs déduits) ou, à défaut, le TTC de la réservation
+     * tant qu'elle est active, moins les paiements reçus.
+     */
+    public function soldeDu(): int
+    {
+        if ($this->factures()->exists()) {
+            $du = (int) $this->factures()->sum('montant_ttc');
+        } elseif (in_array($this->statut, [StatutReservation::EnAttente, StatutReservation::Refusee, StatutReservation::Expiree, StatutReservation::Annulee, StatutReservation::NonPresente], true)) {
+            $du = 0;
+        } else {
+            $du = $this->montant_ttc;
+        }
+
+        return $du - (int) $this->paiements()->sum('montant');
+    }
+
+    /** RG07 : paiement dû 48 h après la remise des clés, sauf prise en charge par un organisme. */
+    public function echeancePaiement(): ?CarbonImmutable
+    {
+        if ($this->payeur === Payeur::Organisme || $this->cles_remises_le === null) {
+            return null;
+        }
+        $heures = (int) Parametre::valeur('delai_paiement_heures', config('uam.payment_deadline_hours'));
+
+        return CarbonImmutable::instance($this->cles_remises_le)->addHours($heures);
     }
 
     /** Jeton du QR code de la fiche : numéro + signature, vérifié par la route /admin/scan/{token}. */

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Reservations\Tables;
 
 use App\Enums\StatutReservation;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -32,6 +33,6 @@ class ReservationsTable
                 SelectFilter::make('site')->label('Site')
                     ->relationship('chambre.site', 'nom'),
             ])
-            ->recordActions([EditAction::make()]);
+            ->recordActions([ViewAction::make(), EditAction::make()]);
     }
 }

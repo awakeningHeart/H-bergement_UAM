@@ -6,6 +6,11 @@ use App\Enums\Repas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property Repas $repas
+ * @property int $quantite
+ * @property int $prix_unitaire
+ */
 class ReservationRepas extends Model
 {
     public $timestamps = false;

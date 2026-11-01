@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Reservations;
 
 use App\Filament\Concerns\RestreintAuxSites;
-use App\Filament\Resources\Reservations\Pages\CreateReservation;
 use App\Filament\Resources\Reservations\Pages\EditReservation;
 use App\Filament\Resources\Reservations\Pages\ListReservations;
 use App\Filament\Resources\Reservations\Schemas\ReservationForm;
@@ -34,6 +33,12 @@ class ReservationResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'numero';
 
+    /** Les réservations naissent du parcours public (disponibilité, hold, numérotation) : pas de création manuelle. */
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ReservationForm::configure($schema);
@@ -47,7 +52,8 @@ class ReservationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\FacturesRelationManager::class,
+            RelationManagers\PaiementsRelationManager::class,
         ];
     }
 
@@ -55,7 +61,7 @@ class ReservationResource extends Resource
     {
         return [
             'index' => ListReservations::route('/'),
-            'create' => CreateReservation::route('/create'),
+            'view' => Pages\ViewReservation::route('/{record}'),
             'edit' => EditReservation::route('/{record}/edit'),
         ];
     }

@@ -33,7 +33,7 @@ class SuiviController extends Controller
     private function trouver(string $jeton): Reservation
     {
         return Reservation::query()
-            ->with(['client', 'chambre.site.ville', 'chambre.type', 'repas'])
+            ->with(['client', 'chambre.site.ville', 'chambre.type', 'repas', 'factures'])
             ->where('jeton_suivi_hash', ReservationService::empreinteSuivi($jeton))
             ->firstOrFail();
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HoldController;
 use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Site\ChambreController;
+use App\Http\Controllers\Site\FactureController;
 use App\Http\Controllers\Site\FicheController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\ScanController;
@@ -27,6 +28,10 @@ Route::middleware('throttle:suivi')->group(function () {
 
 // Fiche PDF (QR code) : accès par lien signé uniquement.
 Route::get('/fiche/{numero}/pdf', [FicheController::class, 'pdf'])->middleware(['signed', 'throttle:suivi'])->name('fiche.pdf');
+
+// Facture / avoir PDF : lien signé pour le client, route authentifiée pour le personnel.
+Route::get('/facture/{numero}/pdf', [FactureController::class, 'client'])->middleware(['signed', 'throttle:suivi'])->name('facture.pdf');
+Route::get('/admin/factures/{facture}/pdf', [FactureController::class, 'personnel'])->middleware('auth')->whereNumber('facture')->name('admin.facture.pdf');
 
 // QR code de la fiche : réservé au personnel connecté (redirige vers la connexion du back-office).
 Route::get('/admin/scan/{token}', ScanController::class)->middleware('auth')->name('admin.scan');

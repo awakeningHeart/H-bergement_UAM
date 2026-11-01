@@ -4,12 +4,20 @@ namespace App\Models;
 
 use App\Enums\TypeFacture;
 use App\Models\Concerns\Audite;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
+/**
+ * @property TypeFacture $type
+ * @property CarbonImmutable|Carbon $emise_le
+ * @property array<string, mixed>|null $donnees
+ */
 class Facture extends Model
 {
     use Audite, HasFactory;
@@ -23,6 +31,7 @@ class Facture extends Model
         return [
             'type' => TypeFacture::class,
             'emise_le' => 'datetime',
+            'donnees' => 'array',
             'montant_ht' => 'integer',
             'montant_tva' => 'integer',
             'montant_ttc' => 'integer',
@@ -45,6 +54,12 @@ class Facture extends Model
     public function reservation(): BelongsTo
     {
         return $this->belongsTo(Reservation::class);
+    }
+
+    /** @return HasMany<Facture, $this> */
+    public function avoirs(): HasMany
+    {
+        return $this->hasMany(self::class, 'facture_origine_id');
     }
 
     public function origine(): BelongsTo

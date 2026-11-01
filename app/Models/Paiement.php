@@ -4,11 +4,17 @@ namespace App\Models;
 
 use App\Enums\ModePaiement;
 use App\Models\Concerns\Audite;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property ModePaiement $mode
+ * @property CarbonImmutable|Carbon $paye_le
+ */
 class Paiement extends Model
 {
     use Audite, HasFactory;
@@ -33,6 +39,7 @@ class Paiement extends Model
         return $this->belongsTo(Facture::class);
     }
 
+    /** @return BelongsTo<User, $this> */
     public function recuPar(): BelongsTo
     {
         return $this->belongsTo(User::class, 'recu_par');

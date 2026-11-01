@@ -74,3 +74,14 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Fiche PDF** : lien signé (2 h à la confirmation, 30 min depuis le suivi). La « Facture PDF » du design est reportée au lot 4 (émission des factures).
 - **Non encore couvert** : pas de SMS de refus (lot 4, workflow) ; pas d'envoi d'e-mail de confirmation.
 - **Tuiles de carte** : OpenStreetMap standard, avec attribution (usage faible volume ; prévoir un fournisseur de tuiles dédié si le trafic augmente).
+
+## D09 — Choix du lot 4
+- **Facture émise à la remise des clés** (passage « En cours ») : le délai de paiement de 48 h (RG07) court à partir de là. Émission manuelle possible sur une réservation confirmée, en cours ou terminée. Une facture se corrige par un avoir total, puis une nouvelle facture.
+- **Facture photographiée** : colonne `factures.donnees` (JSON) figée à l'émission, PDF écrit sur le disque privé (`storage/app/private/factures`) ; seul `pdf_path` peut changer après création. Les avoirs ont des montants négatifs et une séquence propre (`AV-`).
+- **Solde dû** = total des factures (avoirs déduits) ou, sans facture, le TTC tant que la réservation est confirmée, en cours ou terminée ; 0 pour une demande en attente, refusée, expirée, annulée ou non présentée. Les remboursements après avoir ne sont pas gérés.
+- **SMS** : confirmation de création, confirmation, refus, expiration et annulation par le personnel partent par la file `database` (`queue:work` requis) ; le code OTP part en direct (latence). L'annulation demandée par le client ne déclenche pas de SMS.
+- **Réservations créées uniquement par le parcours public** (pas de création manuelle au guichet) ; le statut, les dates, la chambre et les montants ne sont pas modifiables dans la fiche ; la Direction consulte via une page en lecture seule.
+- **Paiements** non modifiables ni supprimables (traçabilité) ; correction = avoir et nouveau paiement.
+- **Non présenté** (RG10) : seul le planificateur ou le gestionnaire le déclenche, sans SMS ; le délai se calcule en heure de Niamey (lendemain de l'arrivée à l'heure limite).
+- **CSP** : appliquée au site public avec `unsafe-inline` et `unsafe-eval` (nécessaires à Livewire/Alpine) ; non appliquée au back-office Filament ni en environnement local. Les autres en-têtes s'appliquent partout.
+- **Tests** : limite mémoire PHP portée à 512 Mo dans `phpunit.xml` (lecture des fichiers Excel).
