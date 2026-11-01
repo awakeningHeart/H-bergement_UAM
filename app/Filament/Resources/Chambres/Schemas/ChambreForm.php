@@ -40,6 +40,8 @@ class ChambreForm
                         FileUpload::make('chemin')
                             ->label('Image')
                             ->image()
+                            // Pas de SVG : un SVG servi depuis notre domaine peut contenir du script.
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                             ->disk('public')
                             ->directory('photos')
                             ->maxSize(4096)

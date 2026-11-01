@@ -38,6 +38,14 @@ class HoldService
             }
 
             $empreinteExistante = $jetonExistant ? self::empreinte($jetonExistant) : null;
+            // Anti-saturation : un visiteur ne peut pas bloquer toutes les chambres (hors celle qu'il remplace).
+            $ipHash = hash('sha256', (string) request()->ip().config('app.key'));
+            $autres = ChambreHold::query()->actifs()->where('ip_hash', $ipHash)
+                ->when($empreinteExistante, fn ($q) => $q->where('token', '!=', $empreinteExistante))->count();
+            if ($autres >= config('uam.max_holds_par_ip')) {
+                throw new ReservationException(__('reservation.erreurs.trop_de_holds'), ReservationException::INDISPONIBLE);
+            }
+
             if (! $this->disponibilites->estDisponible($chambre, $arrivee, $depart, $empreinteExistante)) {
                 throw new ReservationException(__('reservation.erreurs.indisponible'), ReservationException::INDISPONIBLE);
             }
@@ -50,6 +58,7 @@ class HoldService
             $hold = ChambreHold::query()->create([
                 'chambre_id' => $chambre->id,
                 'telephone' => $telephone,
+                'ip_hash' => $ipHash,
                 'arrivee' => $arrivee,
                 'depart' => $depart,
                 'expire_le' => now()->addMinutes(config('uam.hold_ttl_minutes')),

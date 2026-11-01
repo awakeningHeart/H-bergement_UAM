@@ -85,3 +85,8 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Non présenté** (RG10) : seul le planificateur ou le gestionnaire le déclenche, sans SMS ; le délai se calcule en heure de Niamey (lendemain de l'arrivée à l'heure limite).
 - **CSP** : appliquée au site public avec `unsafe-inline` et `unsafe-eval` (nécessaires à Livewire/Alpine) ; non appliquée au back-office Filament ni en environnement local. Les autres en-têtes s'appliquent partout.
 - **Tests** : limite mémoire PHP portée à 512 Mo dans `phpunit.xml` (lecture des fichiers Excel).
+
+## D10 — Revue de sécurité (2 novembre 2026)
+- **Saturation des chambres** : `POST /api/holds` et le formulaire sont publics. Plafond de 3 holds actifs par adresse IP (empreinte SHA-256 salée par la clé d'application), hors celui que le visiteur remplace. Derrière un proxy inverse, déclarer les proxys de confiance pour que l'IP soit la vraie.
+- **Téléversements** : JPEG, PNG, WebP uniquement (pas de SVG servi depuis le domaine de l'application).
+- **Constats sans changement** : aucune sortie Blade non échappée (`{!! !!}`), requêtes brutes uniquement statiques, aucune lecture de `env()` hors configuration, annulation de suivi limitée au téléphone vérifié.

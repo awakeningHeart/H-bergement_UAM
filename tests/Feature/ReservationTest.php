@@ -394,3 +394,36 @@ it('n\'expose aucune route API de réservation sans limitation de débit', funct
         expect($middlewares->contains(fn ($m) => str_starts_with($m, 'throttle:')))->toBeTrue($nom);
     }
 });
+
+// --- Anti-saturation des holds --------------------------------------------------------------
+
+it('plafonne le nombre de chambres qu\'un même visiteur peut bloquer', function () {
+    $chambres = Chambre::factory()->count(4)->create();
+
+    foreach ($chambres->take(3) as $c) {
+        hold($c, $this->arrivee, $this->depart);
+    }
+
+    expect(fn () => hold($chambres[3], $this->arrivee, $this->depart))->toThrow(ReservationException::class, 'plusieurs chambres');
+    expect(ChambreHold::count())->toBe(3);
+});
+
+it('permet de remplacer son propre hold sans atteindre le plafond', function () {
+    $chambres = Chambre::factory()->count(3)->create();
+    $jetons = $chambres->map(fn ($c) => hold($c, $this->arrivee, $this->depart));
+
+    $nouveau = hold($chambres[0], $this->arrivee, now('Africa/Niamey')->addDays(13)->toDateString(), $jetons[0]);
+
+    expect(ChambreHold::count())->toBe(3)->and($nouveau)->not->toBe($jetons[0]);
+});
+
+it('libère le plafond quand les holds expirent', function () {
+    $chambres = Chambre::factory()->count(4)->create();
+    foreach ($chambres->take(3) as $c) {
+        hold($c, $this->arrivee, $this->depart);
+    }
+
+    $this->travel(16)->minutes();
+
+    expect(hold($chambres[3], $this->arrivee, $this->depart))->toBeString();
+});

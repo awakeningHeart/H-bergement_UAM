@@ -16,4 +16,4 @@ Détail et preuves : `docs/PV-RECETTE.md`.
 - [x] ✅ Gestionnaire limité à ses sites ; Direction en lecture seule
 - [x] ✅ Facture immuable, avoir fonctionnel
 - [x] ✅ Journal d'audit, export Excel, tableau de bord
-- [ ] 🟡 Mobile 360 px OK, tests Pest verts, pint et phpstan propres — tests, pint et phpstan ✅ ; contrôle visuel à 360 px ⬜ (à faire sur appareil)
+- [x] ✅ Mobile 360 px OK, tests Pest verts, pint et phpstan propres — 360 px mesuré (voir PV), à confirmer sur un vrai téléphone

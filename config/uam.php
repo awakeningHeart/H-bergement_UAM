@@ -14,6 +14,9 @@ return [
         'max_sends_per_10_min' => (int) env('OTP_MAX_SENDS_PER_10_MIN', 3),
     ],
 
+    // Chambres qu'un même visiteur (adresse IP) peut bloquer en même temps.
+    'max_holds_par_ip' => (int) env('HOLDS_MAX_PAR_IP', 3),
+
     'hold_ttl_minutes' => (int) env('HOLD_TTL_MINUTES', 15),
     'pending_expiry_hours' => (int) env('PENDING_EXPIRY_HOURS', 24),
     'payment_deadline_hours' => (int) env('PAYMENT_DEADLINE_HOURS', 48),

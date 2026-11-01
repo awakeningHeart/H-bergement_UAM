@@ -8,7 +8,7 @@ Ce PV couvre les essais réalisés **par le développeur** sur son poste (MySQL 
 
 | Contrôle | Résultat |
 |---|---|
-| Tests automatisés (Pest) | 168 tests, tous réussis |
+| Tests automatisés (Pest) | 171 tests, tous réussis |
 | Style (Laravel Pint) | aucun écart |
 | Analyse statique (Larastan, niveau 6) | 0 erreur |
 | Essais réels en parallèle (6 processus, base de développement) | un seul blocage de chambre accepté sur 6 demandes simultanées ; 7 numéros de séquence distincts, consécutifs (1 à 7), sans doublon (un 8e processus n'a pas abouti, cause non élucidée) |
@@ -31,7 +31,7 @@ Ce PV couvre les essais réalisés **par le développeur** sur son poste (MySQL 
 | 11 | Gestionnaire limité à ses sites ; Direction en lecture seule | `PoliciesTest`, `BackOfficeWorkflowTest` (RG11 sur fiche, scan, export, factures, paiements ; direction sans action, fiche en consultation seule) | Avec les vrais comptes |
 | 12 | Facture immuable, avoir | `FacturationTest` (immuabilité au niveau modèle et policy, avoir négatif, un seul avoir, nouvelle facture après avoir, numérotation distincte, contenu figé, RG08) | Valider le modèle de facture |
 | 13 | Journal d'audit, export Excel, tableau de bord | `WorkflowTest` (entrée d'audit avec auteur), `BackOfficeWorkflowTest` (export Excel : colonnes, RG11, téléchargement ; indicateurs et widgets) | — |
-| 14 | Mobile 360 px, tests, pint, phpstan | Tests, Pint et PHPStan : conformes. **Contrôle visuel à 360 px non réalisé** (l'outil de navigation n'a pas appliqué le redimensionnement) ; styles responsives écrits (grilles adaptatives, modal plein écran sous 640 px, champs ≥ 44 px) | **À faire** sur téléphone |
+| 14 | Mobile 360 px, tests, pint, phpstan | Tests, Pint et PHPStan : conformes. **Mesures à 360 px** (cadre de 360 px dans Chrome, 4 pages : accueil, ville, site, chambre) : aucun débordement horizontal ; formulaire de réservation en plein écran (360 × 780), champ téléphone de 50 px de haut, boutons visibles, compte à rebours actif | Confirmer sur un vrai téléphone |
 
 ## 3. Règles de gestion
 
@@ -52,10 +52,11 @@ Ce PV couvre les essais réalisés **par le développeur** sur son poste (MySQL 
 
 1. **Passerelle SMS non branchée** : les SMS sont écrits dans le journal. Indispensable avant ouverture au public.
 2. **Données institutionnelles** : tarifs, noms de sites, TVA, conditions générales, coordonnées bancaires sont des valeurs de démonstration ou `[À renseigner]`.
-3. **Contrôle visuel mobile (360 px)** et rendu du back-office (tableau de bord, fiche de réservation) : vérifiés par tests mais **non contrôlés à l'œil** ; à faire à la recette.
+3. **Rendu du back-office** (tableau de bord, fiche de réservation) : vérifié par tests mais **non contrôlé à l'œil** ; à faire à la recette. Le site public a été mesuré à 360 px (pas d'inspection visuelle sur appareil réel).
 4. **Création manuelle de réservation** par le personnel : non prévue (les réservations passent par le parcours public, qui garantit disponibilité et numérotation).
 5. **Réponses aux avoirs avec paiement déjà encaissé** : le remboursement n'est pas géré (le solde peut devenir négatif) ; à traiter par le service comptable.
 6. **E-mail de confirmation** : non prévu (SMS uniquement).
+7. **Derrière un proxy inverse**, configurer les proxys de confiance (adresse IP réelle des visiteurs) : les limites de débit et le plafond de chambres bloquées par visiteur reposent sur l'adresse IP.
 
 ## 5. Signatures
 

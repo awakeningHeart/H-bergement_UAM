@@ -53,6 +53,7 @@ CACHE_STORE=database
 SESSION_DRIVER=database
 SESSION_SECURE_COOKIE=true                  # cookies HTTPS uniquement
 SESSION_SAME_SITE=lax
+HOLDS_MAX_PAR_IP=3                          # chambres qu un meme visiteur peut bloquer a la fois
 
 SMS_DRIVER=log                              # log | null | <fournisseur> (voir §7)
 SMS_SENDER=UAM

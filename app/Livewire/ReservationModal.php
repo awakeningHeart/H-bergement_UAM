@@ -130,6 +130,12 @@ class ReservationModal extends Component
             return;
         }
 
+        if (! $this->limiter('holds', 20)) {
+            $this->perdreChambre(__('reservation.erreurs.trop_de_demandes'));
+
+            return;
+        }
+
         $this->poserHold($holds);
     }
 

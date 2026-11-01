@@ -36,6 +36,7 @@ return [
 
     'erreurs' => [
         'indisponible' => 'Cette chambre n\'est plus disponible pour ces dates. Choisissez une autre chambre ou d\'autres dates.',
+        'trop_de_holds' => 'Vous avez déjà plusieurs chambres en cours de réservation. Terminez ou libérez-en une avant d\'en choisir une autre.',
         'hold_expire' => 'Le délai de réservation temporaire de la chambre est dépassé. Veuillez recommencer votre choix.',
         'verification' => 'Veuillez d\'abord confirmer votre numéro avec le code reçu par SMS.',
         'annulation_impossible' => 'Cette réservation ne peut plus être annulée.',

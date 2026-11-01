@@ -51,3 +51,10 @@
 ### Modifié
 - Les liens de factures (PDF) sont disponibles dans la page de suivi du client.
 - Création manuelle de réservation et édition des paiements retirées du back-office ; réservations non supprimables.
+
+## [Correctifs après revue] - 2026-11-02
+### Sécurité
+- Un visiteur ne peut plus bloquer toutes les chambres : plafond de 3 blocages simultanés par adresse IP (`HOLDS_MAX_PAR_IP`, empreinte stockée dans `chambre_holds.ip_hash`) ; le formulaire Livewire est aussi limité en débit.
+- Photos du back-office : seuls JPEG, PNG et WebP sont acceptés (les SVG, pouvant contenir du script, sont refusés).
+### Qualité
+- 3 tests ajoutés (171 au total) ; contrôle de non-débordement à 360 px réalisé sur le site public.
