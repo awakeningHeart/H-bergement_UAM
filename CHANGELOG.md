@@ -58,3 +58,9 @@
 - Photos du back-office : seuls JPEG, PNG et WebP sont acceptés (les SVG, pouvant contenir du script, sont refusés).
 ### Qualité
 - 3 tests ajoutés (171 au total) ; contrôle de non-débordement à 360 px réalisé sur le site public.
+
+## [Logo] - 2026-11-08
+### Modifié
+- Nouveau logo à fond transparent (`logo-uam-transparent.png`) sur le site public (barre, pied, favicon), le back-office et les PDF (fiche, facture) ; marges du logo ajustées.
+### Qualité
+- Test du tableau de bord rendu déterministe (date de la réservation de base fixée dans le mois).

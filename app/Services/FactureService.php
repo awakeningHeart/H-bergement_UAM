@@ -124,7 +124,7 @@ class FactureService
         return Pdf::loadView('pdf.facture', [
             'facture' => $facture,
             'd' => $facture->donnees ?? [],
-            'logo' => 'data:image/png;base64,'.base64_encode((string) file_get_contents(public_path('images/logo-hebergement-uam.png'))),
+            'logo' => 'data:image/png;base64,'.base64_encode((string) file_get_contents(public_path('images/logo-uam-transparent.png'))),
         ])->setPaper('a4')->output();
     }
 

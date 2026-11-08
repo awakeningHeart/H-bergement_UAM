@@ -24,7 +24,7 @@ class FicheController extends Controller
         $pdf = Pdf::loadView('pdf.fiche', [
             'reservation' => $reservation,
             'qr' => 'data:image/svg+xml;base64,'.base64_encode((string) $qr),
-            'logo' => 'data:image/png;base64,'.base64_encode((string) file_get_contents(public_path('images/logo-hebergement-uam.png'))),
+            'logo' => 'data:image/png;base64,'.base64_encode((string) file_get_contents(public_path('images/logo-uam-transparent.png'))),
             'conditions' => Parametre::valeur('conditions_generales'),
         ])->setPaper('a4');
 

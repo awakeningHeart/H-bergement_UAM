@@ -11,7 +11,7 @@
 <footer class="footer">
     <div class="wrap footer__grid">
         <div class="footer__col">
-            <img class="footer__logo" src="{{ asset('images/logo-hebergement-uam.png') }}" alt="{{ __('site.nom') }}" loading="lazy">
+            <img class="footer__logo" src="{{ asset('images/logo-uam-transparent.png') }}" alt="{{ __('site.nom') }}" loading="lazy">
         </div>
         <div class="footer__col">
             <b>{{ __('site.pied.service') }}</b>

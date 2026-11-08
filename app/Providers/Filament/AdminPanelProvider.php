@@ -29,9 +29,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Hébergement UAM')
-            ->brandLogo(asset('images/logo-hebergement-uam.png'))
+            ->brandLogo(asset('images/logo-uam-transparent.png'))
             ->brandLogoHeight('2.5rem')
-            ->favicon(asset('images/logo-hebergement-uam.png'))
+            ->favicon(asset('images/logo-uam-transparent.png'))
             ->font('Public Sans')
             ->colors([
                 'primary' => Color::hex('#E30613'),

@@ -55,7 +55,7 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
   - Villes du design (Niamey, Dosso, Tillabéri, Say) et sites/chambres du design : données de démonstration, à valider.
   - Message de confirmation du design (« envoyée par e-mail ») : la confirmation passe par SMS (e-mail en complément si renseigné).
   - **Motifs de séjour (validé)** : 5 motifs (mission, colloque, jury, enseignant_visiteur, autre) ; colonne `reservations.motif` étendue dans la migration (aucune donnée en production). Le sélecteur « Personnes » filtre les chambres par capacité.
-  - **Logo (validé)** : `logo-hebergement-uam.png` partout (site public, back-office, PDF) ; le logo du handoff n'est pas utilisé.
+  - **Logo (remplacé le 1er novembre 2026)** : `logo-uam-transparent.png` partout (remplace `logo-hebergement-uam.png`) (site public, back-office, PDF) ; le logo du handoff n'est pas utilisé.
 
 ## D07 — Choix du lot 2
 - **Disponibilité** : les bornes d'un séjour sont normalisées à l'heure de départ (12:00 à Niamey) ; un départ le matin de J ne bloque donc pas une arrivée l'après-midi de J, mais un départ tardif (> 12:00) bloque le jour J (RG05). Les holds (dates) sont comparés au jour près. Une chambre sans tarif en vigueur n'est pas proposée.

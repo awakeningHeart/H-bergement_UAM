@@ -16,7 +16,7 @@
 <div class="navbar">
     <nav class="wrap navbar__inner" aria-label="Navigation principale">
         <a class="navbar__logo" href="{{ route('accueil') }}">
-            <img src="{{ asset('images/logo-hebergement-uam.png') }}" alt="{{ __('site.nom') }}">
+            <img src="{{ asset('images/logo-uam-transparent.png') }}" alt="{{ __('site.nom') }}">
         </a>
         <div class="navbar__links">
             <a href="{{ route('accueil') }}#destinations">{{ __('site.nav.destinations') }}</a>
