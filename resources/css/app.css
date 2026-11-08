@@ -181,7 +181,8 @@ input:focus, select:focus { outline: none; border-color: var(--bleu) !important;
 .footer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-top: 72px; padding-bottom: 40px; }
 .footer__col { display: flex; flex-direction: column; gap: 8px; line-height: 1.6; }
 .footer__col b { color: var(--texte); font-weight: 400; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 6px; }
-.footer__logo { height: 110px; margin: -12px 0 -12px -20px; width: auto; align-self: start; display: block; }
+/* Même taille et même décalage que le logo de l'en-tête (.navbar__logo img). */
+.footer__logo { height: 92px; margin: -10px 0 -10px -20px; width: auto; align-self: start; display: block; }
 .footer__legal { border-top: 1px solid var(--filet); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; padding-top: 24px; padding-bottom: 24px; }
 
 /* Pages intérieures */
@@ -219,6 +220,7 @@ input:focus, select:focus { outline: none; border-color: var(--bleu) !important;
 
 @media (max-width: 640px) {
     .navbar__logo img { height: 76px; margin: -8px -16px; }
+    .footer__logo { height: 76px; margin: -8px 0 -8px -16px; }
     .search label { border-right: 0; border-bottom: 1px solid var(--filet); }
     .room__body { padding: 22px; }
     .topbar__right { gap: 14px; }
