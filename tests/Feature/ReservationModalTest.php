@@ -132,6 +132,12 @@ it('libère le hold avec « Changer de chambre »', function () {
     expect(ChambreHold::count())->toBe(0);
 });
 
+it('affiche un bouton de fermeture à chaque étape', function () {
+    modalOuvert($this)
+        ->assertSeeHtml('class="modal__close" wire:click="fermer" aria-label="Fermer"')
+        ->assertSee('Changer de chambre');
+});
+
 it('ne peut pas être ouvert sur une chambre déjà bloquée par un autre navigateur', function () {
     app(HoldService::class)->creer($this->chambre->id, $this->arrivee, $this->depart);
 

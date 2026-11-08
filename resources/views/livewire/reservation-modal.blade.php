@@ -36,7 +36,12 @@
                             {{ __('reservation.modal.reservee') }} <span x-text="fmt()"></span>
                         </span>
                     @endif
-                    <button type="button" class="modal__link" wire:click="fermer">{{ $etape === 4 ? __('reservation.modal.fermer') : __('reservation.modal.changer') }}</button>
+                    @if ($etape !== 4)
+                        <button type="button" class="modal__link" wire:click="fermer">{{ __('reservation.modal.changer') }}</button>
+                    @endif
+                    <button type="button" class="modal__close" wire:click="fermer" aria-label="{{ __('reservation.modal.fermer') }}" title="{{ __('reservation.modal.fermer') }}">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
                 </div>
             </div>
 

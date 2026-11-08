@@ -28,7 +28,10 @@
 .modal__ctx .dim { opacity: .4; }
 .modal__ctx .white { color: #fff; }
 .modal__room { font-family: var(--display); font-size: 20px; color: #fff; }
-.modal__tools { display: flex; gap: 18px; align-items: center; }
+.modal__tools { display: flex; gap: 18px; align-items: center; margin-left: auto; }
+.modal__close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -10px -14px -10px -6px; background: transparent; border: 0; border-radius: 50%; color: #fff; cursor: pointer; }
+.modal__close:hover { background: rgba(255, 255, 255, .12); }
+.modal__close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .modal__timer { font-size: 12px; color: #f25a63; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
 .modal__link { background: transparent; border: 0; border-bottom: 1px solid var(--rouge); color: #fff; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; padding: 0 0 2px; }
 .modal__link--dark { color: var(--texte); }

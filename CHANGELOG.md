@@ -78,3 +78,7 @@
 - Versions anglaises facultatives des contenus (types de chambre, équipements, adresses et descriptions des sites et chambres) saisies dans le back-office ; à défaut, le français est affiché. Données de démonstration traduites.
 ### Restent en français
 - Back-office, fiche PDF, factures, SMS envoyés par le personnel, noms propres (villes, sites) et conditions générales.
+
+## [Correctif] - 2026-11-08
+### Modifié
+- Formulaire de réservation : bouton de fermeture × en haut à droite (zone de 44 px, libellé « Fermer » / « Close » pour les lecteurs d'écran), en plus de « Changer de chambre » et de la touche Échap ; la chambre bloquée est libérée à la fermeture.
