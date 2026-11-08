@@ -135,7 +135,9 @@ it('libère le hold avec « Changer de chambre »', function () {
 it('affiche un bouton de fermeture à chaque étape', function () {
     modalOuvert($this)
         ->assertSeeHtml('class="modal__close" wire:click="fermer" aria-label="Fermer"')
-        ->assertSee('Changer de chambre');
+        ->assertSee('Changer de chambre')
+        ->assertSee('Chambre bloquée pour vous')
+        ->assertSee('Sans confirmation dans ce délai, la chambre sera libérée.');
 });
 
 it('ne peut pas être ouvert sur une chambre déjà bloquée par un autre navigateur', function () {

@@ -28,12 +28,13 @@
                 </div>
                 <div class="modal__tools">
                     @if ($holdExpire > 0 && $etape >= 1 && $etape <= 3)
-                        <span class="modal__timer" wire:key="timer-{{ $holdExpire }}"
+                        <span class="modal__timer" wire:key="timer-{{ $holdExpire }}" title="{{ __('reservation.modal.bloquee_aide') }}"
                               x-data="{ left: {{ $restant }}, t: null,
                                         init() { this.t = setInterval(() => { if (this.left > 0) { this.left--; } if (this.left <= 0) { clearInterval(this.t); $wire.expirer(); } }, 1000); },
                                         destroy() { clearInterval(this.t); },
                                         fmt() { return Math.floor(this.left / 60) + ':' + String(this.left % 60).padStart(2, '0'); } }">
-                            {{ __('reservation.modal.reservee') }} <span x-text="fmt()"></span>
+                            {{ __('reservation.modal.bloquee') }} · <span x-text="fmt()"></span>
+                            <span class="sr-only">{{ __('reservation.modal.bloquee_aide') }}</span>
                         </span>
                     @endif
                     @if ($etape !== 4)

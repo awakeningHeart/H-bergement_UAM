@@ -82,3 +82,4 @@
 ## [Correctif] - 2026-11-08
 ### Modifié
 - Formulaire de réservation : bouton de fermeture × en haut à droite (zone de 44 px, libellé « Fermer » / « Close » pour les lecteurs d'écran), en plus de « Changer de chambre » et de la touche Échap ; la chambre bloquée est libérée à la fermeture.
+- Compte à rebours du blocage de chambre : « Chambre bloquée pour vous · 14:21 » (au lieu de « Réservée », trompeur), avec l'infobulle « Sans confirmation dans ce délai, la chambre sera libérée. », aussi lue par les lecteurs d'écran.
