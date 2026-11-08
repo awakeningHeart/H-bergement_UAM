@@ -6,7 +6,7 @@
     <header class="resume__tete">
         <div>
             <div class="resume__num">{{ $reservation->numero }}</div>
-            <div class="resume__lieu">{{ $reservation->chambre->site->nom }} · {{ $reservation->chambre->type->libelle }} — {{ __('site.chambres.numero', ['numero' => $reservation->chambre->numero]) }}</div>
+            <div class="resume__lieu">{{ $reservation->chambre->site->nom }} · {{ $reservation->chambre->type->traduit('libelle') }} — {{ __('site.chambres.numero', ['numero' => $reservation->chambre->numero]) }}</div>
         </div>
         <span class="statut statut--{{ $reservation->statut->couleur() }}">{{ $reservation->statut->libelle() }}</span>
     </header>

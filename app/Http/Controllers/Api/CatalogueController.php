@@ -31,7 +31,7 @@ class CatalogueController extends Controller
         return response()->json(['data' => $sites->map(fn ($s) => [
             'nom' => $s->nom,
             'slug' => $s->slug,
-            'adresse' => $s->adresse,
+            'adresse' => $s->traduit('adresse'),
             'latitude' => $s->latitude !== null ? (float) $s->latitude : null,
             'longitude' => $s->longitude !== null ? (float) $s->longitude : null,
             'chambres' => $s->chambres_count,
@@ -57,9 +57,9 @@ class CatalogueController extends Controller
             'numero' => $c->numero,
             'site' => $c->site->nom,
             'ville' => $c->site->ville->nom,
-            'type' => $c->type->libelle,
+            'type' => $c->type->traduit('libelle'),
             'capacite' => $c->type->capacite,
-            'equipements' => $c->type->equipements ?? [],
+            'equipements' => $c->type->traduit('equipements') ?? [],
             'prix_nuit' => $c->getAttribute('tarif_en_vigueur')->prix_nuit,
             'url' => route('chambre', $c),
         ])->values()]);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\Audite;
+use App\Models\Concerns\Traduisible;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chambre extends Model
 {
-    use Audite, HasFactory, SoftDeletes;
+    use Audite, HasFactory, SoftDeletes, Traduisible;
 
     protected $table = 'chambres';
 

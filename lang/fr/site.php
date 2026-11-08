@@ -6,6 +6,8 @@ return [
     'topbar' => 'Université Abdou Moumouni · Rectorat · DAIG — Maisons d\'hôtes',
     'suivre' => 'Suivre ma réservation',
     'skip' => 'Aller au contenu',
+    'fil_ariane' => 'Fil d\'Ariane',
+    'format_heure' => ':hh00',
 
     'nav' => [
         'destinations' => 'Destinations',
@@ -13,6 +15,7 @@ return [
         'carte' => 'Carte des sites',
         'experience' => 'L\'expérience',
         'reserver' => 'Réserver',
+        'principale' => 'Navigation principale',
     ],
 
     'hero' => [
@@ -33,6 +36,7 @@ return [
         'personne' => ':n personne|:n personnes',
         'bouton' => 'Rechercher',
         'type_toutes' => 'Toutes',
+        'type' => 'Type de chambre',
     ],
 
     'destinations' => [
@@ -116,6 +120,7 @@ return [
         'verifier' => 'Vérifier les dates',
         'retour' => 'Retour aux chambres du site',
         'photo' => 'Photo — :type',
+        'photo_n' => 'Photo :n',
     ],
 
     'photo_a_venir' => 'Photo à venir',

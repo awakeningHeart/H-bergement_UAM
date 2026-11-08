@@ -99,7 +99,7 @@
                         <span class="map-item__dot"></span>
                         <span>
                             <span class="map-item__name">{{ $s->nom }}</span>
-                            <span class="map-item__addr">{{ $s->adresse }}</span>
+                            <span class="map-item__addr">{{ $s->traduit('adresse') }}</span>
                         </span>
                         <span class="map-item__rooms">{{ __('site.carte.chambres', ['n' => $s->chambres_count]) }}</span>
                     </button>

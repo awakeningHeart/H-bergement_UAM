@@ -1,24 +1,24 @@
 @extends('layouts.public')
 
 @php
-    $titre = $chambre->type->libelle.' — '.__('site.chambres.numero', ['numero' => $chambre->numero]);
-    $equipements = $chambre->type->equipements ?? [];
+    $titre = $chambre->type->traduit('libelle').' — '.__('site.chambres.numero', ['numero' => $chambre->numero]);
+    $equipements = $chambre->type->traduit('equipements') ?? [];
     $ht = $tarif ? $tarif->prix_nuit * $nuitees : null;
 @endphp
 
 @section('titre', $titre.' · '.$site->nom)
-@section('description', $chambre->description ?: __('site.hero.texte'))
+@section('description', $chambre->traduit('description') ?: __('site.hero.texte'))
 
 @section('contenu')
 <div class="wrap">
-    <nav class="crumbs" aria-label="Fil d'Ariane">
+    <nav class="crumbs" aria-label="{{ __('site.fil_ariane') }}">
         <a href="{{ route('accueil') }}">{{ __('site.ville.accueil') }}</a> <span>›</span>
         <a href="{{ route('ville', $ville) }}">{{ $ville->nom }}</a> <span>›</span>
         <a href="{{ route('site', $site) }}">{{ $site->nom }}</a> <span>›</span> <span>{{ $titre }}</span>
     </nav>
     <div class="page-head">
         <div class="eyebrow" style="margin-top:28px">{{ $site->nom }}</div>
-        <h1 class="page-title">{{ $chambre->type->libelle }} <span style="font-size:.4em;color:var(--gris-2);font-family:'Jost',sans-serif">{{ __('site.chambres.numero', ['numero' => $chambre->numero]) }}</span></h1>
+        <h1 class="page-title">{{ $chambre->type->traduit('libelle') }} <span style="font-size:.4em;color:var(--gris-2);font-family:'Jost',sans-serif">{{ __('site.chambres.numero', ['numero' => $chambre->numero]) }}</span></h1>
     </div>
 </div>
 
@@ -29,13 +29,13 @@
                 @if ($chambre->photos->isNotEmpty())
                     <img data-galerie-principale src="{{ $chambre->photos->first()->url() }}" alt="{{ $titre }}">
                 @else
-                    <x-photo :alt="$titre" :libelle="__('site.fiche.photo', ['type' => $chambre->type->libelle])" />
+                    <x-photo :alt="$titre" :libelle="__('site.fiche.photo', ['type' => $chambre->type->traduit('libelle')])" />
                 @endif
             </div>
             @if ($chambre->photos->count() > 1)
                 <div class="gallery__thumbs">
                     @foreach ($chambre->photos as $i => $photo)
-                        <button type="button" class="{{ $i === 0 ? 'is-on' : '' }}" data-galerie-vignette="{{ $photo->url() }}" aria-label="Photo {{ $i + 1 }}">
+                        <button type="button" class="{{ $i === 0 ? 'is-on' : '' }}" data-galerie-vignette="{{ $photo->url() }}" aria-label="{{ __('site.fiche.photo_n', ['n' => $i + 1]) }}">
                             <img src="{{ $photo->url() }}" alt="" loading="lazy">
                         </button>
                     @endforeach
@@ -43,9 +43,9 @@
             @endif
 
             <div style="margin-top:36px">
-                @if ($chambre->description)
+                @if ($chambre->traduit('description'))
                     <h2 class="block-title">{{ __('site.fiche.description') }}</h2>
-                    <p class="info-line">{{ $chambre->description }}</p>
+                    <p class="info-line">{{ $chambre->traduit('description') }}</p>
                 @endif
                 <h2 class="block-title" style="margin-top:28px">{{ __('site.fiche.equipements') }}</h2>
                 <ul class="amen">

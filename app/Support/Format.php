@@ -15,4 +15,10 @@ class Format
     {
         return self::nombre($valeur)."\u{00A0}".config('uam.currency', 'FCFA');
     }
+
+    /** Heure pleine dans la langue courante : « 12h00 » en français, « 12:00 » en anglais. */
+    public static function heure(int $heure): string
+    {
+        return __('site.format_heure', ['h' => sprintf('%02d', $heure)]);
+    }
 }

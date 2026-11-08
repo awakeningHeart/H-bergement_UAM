@@ -35,6 +35,17 @@ class DemoSeeder extends Seeder
         $double = TypeChambre::firstOrCreate(['libelle' => 'Chambre Double Supérieure'], ['capacite' => 2, 'equipements' => ['Climatisation', 'Salle de bain privée', 'Bureau']]);
         $suite = TypeChambre::firstOrCreate(['libelle' => 'Suite Rectorat'], ['capacite' => 2, 'equipements' => ['Salon privé', 'Climatisation', 'Terrasse']]);
 
+        // Versions anglaises de démonstration (interface anglaise), sans écraser une saisie existante.
+        foreach ([
+            [$simple, 'Single Room', ['Air conditioning', 'Private bathroom', 'Wi-Fi']],
+            [$double, 'Superior Double Room', ['Air conditioning', 'Private bathroom', 'Desk']],
+            [$suite, 'Rectorate Suite', ['Private lounge', 'Air conditioning', 'Terrace']],
+        ] as [$type, $libelle, $equipements]) {
+            if (blank($type->libelle_en)) {
+                $type->update(['libelle_en' => $libelle, 'equipements_en' => $equipements]);
+            }
+        }
+
         // Tarifs de démonstration par type (valeurs du design, à remplacer par les tarifs officiels).
         foreach ([[$simple, 18000], [$double, 25000], [$suite, 40000]] as [$type, $prix]) {
             Tarif::firstOrCreate(
@@ -48,16 +59,16 @@ class DemoSeeder extends Seeder
         }
 
         $sites = [
-            ['niamey', 'maison-hotes-campus', "Maison d'hôtes du Campus", 'Campus universitaire, rive droite', 13.4997, 2.0946],
-            ['niamey', 'residence-rectorat', 'Résidence du Rectorat', 'Rive droite, près du Rectorat', 13.5045, 2.1012],
-            ['niamey', 'villa-des-hotes', 'Villa des Hôtes', 'Quartier Plateau', 13.5232, 2.1058],
-            ['dosso', 'dosso-site-regional', '[Site régional de Dosso - À renseigner]', '[À renseigner]', 13.0490, 3.1937],
-            ['tillaberi', 'tillaberi-site-regional', '[Site régional de Tillabéri - À renseigner]', '[À renseigner]', 14.2111, 1.4536],
-            ['say', 'say-site-regional', '[Site régional de Say - À renseigner]', '[À renseigner]', 13.1000, 2.3667],
+            ['niamey', 'maison-hotes-campus', "Maison d'hôtes du Campus", 'Campus universitaire, rive droite', 'University campus, right bank', 13.4997, 2.0946],
+            ['niamey', 'residence-rectorat', 'Résidence du Rectorat', 'Rive droite, près du Rectorat', 'Right bank, near the Rectorate', 13.5045, 2.1012],
+            ['niamey', 'villa-des-hotes', 'Villa des Hôtes', 'Quartier Plateau', 'Plateau district', 13.5232, 2.1058],
+            ['dosso', 'dosso-site-regional', '[Site régional de Dosso - À renseigner]', '[À renseigner]', null, 13.0490, 3.1937],
+            ['tillaberi', 'tillaberi-site-regional', '[Site régional de Tillabéri - À renseigner]', '[À renseigner]', null, 14.2111, 1.4536],
+            ['say', 'say-site-regional', '[Site régional de Say - À renseigner]', '[À renseigner]', null, 13.1000, 2.3667],
         ];
 
         $sitesCrees = [];
-        foreach ($sites as [$ville, $slug, $nom, $adresse, $lat, $lng]) {
+        foreach ($sites as [$ville, $slug, $nom, $adresse, $adresseEn, $lat, $lng]) {
             $site = Site::firstOrCreate(['slug' => $slug], [
                 'ville_id' => $villes[$ville]->id,
                 'nom' => $nom,
@@ -68,6 +79,9 @@ class DemoSeeder extends Seeder
                 'telephone' => null,
                 'actif' => true,
             ]);
+            if ($adresseEn && blank($site->adresse_en)) {
+                $site->update(['adresse_en' => $adresseEn]);
+            }
             foreach ([['101', $simple, '1'], ['102', $simple, '1'], ['201', $double, '2'], ['202', $double, '2'], ['301', $suite, '3']] as [$numero, $type, $etage]) {
                 Chambre::firstOrCreate(['site_id' => $site->id, 'numero' => $numero], [
                     'type_chambre_id' => $type->id,

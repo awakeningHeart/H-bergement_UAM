@@ -69,10 +69,12 @@
 ### Ajouté
 - Sélecteur FR / EN dans le bandeau supérieur (langue gardée en session, français par défaut) ; fichiers `lang/en` (site, réservation, statuts et repas, validation).
 - Site public, formulaire de réservation, suivi, messages d'erreur et SMS de la visite (code, accusé de réception) en anglais.
-- 8 tests (changement de langue, redirection sûre, back-office en français, formulaire en anglais, journal en français).
+- 10 tests (changement de langue, contenus traduits, format d'heure, redirection sûre, back-office en français, formulaire en anglais, journal en français).
 ### Modifié
 - Libellés des statuts, motifs et repas lus depuis `lang/*/enums.php` ; le journal d'audit reste en français.
 - Messages de validation propres à un champ déplacés dans `lang/*/validation.php` (appliqués aussi au formulaire Livewire).
 - Langue par défaut de l'application : `fr` (même sans `APP_LOCALE`).
+- Correctifs après relecture : étiquettes d'accessibilité traduites (fil d'Ariane, navigation, filtre, photos), heure au format anglais (« 12:00 »).
+- Versions anglaises facultatives des contenus (types de chambre, équipements, adresses et descriptions des sites et chambres) saisies dans le back-office ; à défaut, le français est affiché. Données de démonstration traduites.
 ### Restent en français
-- Back-office, fiche PDF, factures, SMS envoyés par le personnel, contenus saisis en base (noms, descriptions, équipements).
+- Back-office, fiche PDF, factures, SMS envoyés par le personnel, noms propres (villes, sites) et conditions générales.

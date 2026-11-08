@@ -32,6 +32,7 @@ class ChambreForm
                     ->unique(ignoreRecord: true, modifyRuleUsing: fn (Unique $rule, callable $get) => $rule->where('site_id', $get('site_id'))->whereNull('deleted_at')),
                 TextInput::make('etage')->label('Étage')->maxLength(20),
                 Textarea::make('description')->label('Description')->columnSpanFull(),
+                Textarea::make('description_en')->label('Description en anglais')->helperText('Facultatif : à défaut, la description française est affichée.')->columnSpanFull(),
                 Toggle::make('actif')->label('Chambre active')->default(true),
                 Repeater::make('photos')
                     ->label('Photos')

@@ -2,7 +2,7 @@
 @php
     $donnees = $sites->map(fn ($s) => [
         'nom' => $s->nom,
-        'adresse' => $s->adresse,
+        'adresse' => $s->traduit('adresse'),
         'lat' => $s->latitude !== null ? (float) $s->latitude : null,
         'lng' => $s->longitude !== null ? (float) $s->longitude : null,
     ])->values();

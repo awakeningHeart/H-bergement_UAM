@@ -23,7 +23,7 @@
 </div>
 
 <div class="navbar">
-    <nav class="wrap navbar__inner" aria-label="Navigation principale">
+    <nav class="wrap navbar__inner" aria-label="{{ __('site.nav.principale') }}">
         <a class="navbar__logo" href="{{ route('accueil') }}">
             <img src="{{ asset('images/logo-uam-transparent.png') }}" alt="{{ __('site.nom') }}">
         </a>

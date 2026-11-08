@@ -25,7 +25,7 @@
         </div>
         <div class="footer__col">
             <b>{{ __('site.pied.savoir') }}</b>
-            <span>{{ __('site.pied.depart', ['heure' => sprintf('%02dh00', $heureDepart)]) }}</span>
+            <span>{{ __('site.pied.depart', ['heure' => \App\Support\Format::heure($heureDepart)]) }}</span>
             <span>{{ __('site.pied.paiement', ['heures' => $delaiPaiement]) }}</span>
         </div>
     </div>

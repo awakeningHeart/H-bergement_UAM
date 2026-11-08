@@ -6,6 +6,8 @@ return [
     'topbar' => 'Abdou Moumouni University · Rectorate · DAIG — Guest houses',
     'suivre' => 'Track my booking',
     'skip' => 'Skip to content',
+    'fil_ariane' => 'Breadcrumb',
+    'format_heure' => ':h:00',
 
     'nav' => [
         'destinations' => 'Destinations',
@@ -13,6 +15,7 @@ return [
         'carte' => 'Site map',
         'experience' => 'The experience',
         'reserver' => 'Book',
+        'principale' => 'Main navigation',
     ],
 
     'hero' => [
@@ -33,6 +36,7 @@ return [
         'personne' => ':n guest|:n guests',
         'bouton' => 'Search',
         'type_toutes' => 'All',
+        'type' => 'Room type',
     ],
 
     'destinations' => [
@@ -116,6 +120,7 @@ return [
         'verifier' => 'Check dates',
         'retour' => 'Back to the site\'s rooms',
         'photo' => 'Photo — :type',
+        'photo_n' => 'Photo :n',
     ],
 
     'photo_a_venir' => 'Photo coming soon',

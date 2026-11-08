@@ -8,6 +8,7 @@ use App\Models\Site;
 use App\Models\Tarif;
 use App\Models\User;
 use App\Models\Ville;
+use App\Support\Format;
 use Database\Seeders\RolesAndPermissionsSeeder;
 use Livewire\Livewire;
 
@@ -84,6 +85,24 @@ it('affiche le formulaire de réservation et ses erreurs en anglais', function (
 
 it('garde le formulaire dans la langue de la page lors des actions Livewire', function () {
     expect(Livewire::getPersistentMiddleware())->toContain(DefinirLangue::class);
+});
+
+it('affiche les contenus saisis en anglais, ou en français à défaut de traduction', function () {
+    $this->chambre->type->update(['libelle' => 'Chambre Simple', 'libelle_en' => 'Single Room', 'equipements' => ['Salle de bain privée'], 'equipements_en' => ['Private bathroom']]);
+    $this->site->update(['adresse' => 'Rive droite', 'adresse_en' => null, 'description' => 'Au bord du fleuve', 'description_en' => 'By the river']);
+
+    $this->withSession(['langue' => 'en'])->get(route('chambre', $this->chambre))
+        ->assertOk()->assertSee('Single Room')->assertSee('Private bathroom')->assertDontSee('Salle de bain privée');
+    $this->withSession(['langue' => 'en'])->get(route('site', $this->site))
+        ->assertOk()->assertSee('By the river')->assertSee('Rive droite');
+    $this->withSession(['langue' => 'fr'])->get(route('chambre', $this->chambre))
+        ->assertOk()->assertSee('Chambre Simple')->assertSee('Salle de bain privée');
+});
+
+it('formate l\'heure de départ selon la langue', function () {
+    expect(Format::heure(12))->toBe('12h00');
+    app()->setLocale('en');
+    expect(Format::heure(9))->toBe('09:00');
 });
 
 it('traduit les libellés publics mais garde le journal d\'audit en français', function () {

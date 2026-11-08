@@ -2,17 +2,17 @@
 @php
     $tarif = $chambre->getAttribute('tarif_en_vigueur');
     $equipements = collect([trans_choice('site.chambres.personnes', $chambre->type->capacite, ['n' => $chambre->type->capacite])])
-        ->merge($chambre->type->equipements ?? [])->take(4);
+        ->merge($chambre->type->traduit('equipements') ?? [])->take(4);
     $lien = route('chambre', ['chambre' => $chambre, 'arrivee' => $arrivee->toDateString(), 'depart' => $depart->toDateString()]);
 @endphp
 <article class="room">
     <a class="room__photo" href="{{ $lien }}" tabindex="-1" aria-hidden="true">
-        <x-photo :photo="$chambre->photos->first()" :alt="$chambre->type->libelle" :libelle="__('site.fiche.photo', ['type' => $chambre->type->libelle])" />
+        <x-photo :photo="$chambre->photos->first()" :alt="$chambre->type->traduit('libelle')" :libelle="__('site.fiche.photo', ['type' => $chambre->type->traduit('libelle')])" />
         <span class="badge">{{ $chambre->site->nom }}</span>
     </a>
     <div class="room__body">
         <div class="room__title">
-            <h3><a href="{{ $lien }}">{{ $chambre->type->libelle }}</a></h3>
+            <h3><a href="{{ $lien }}">{{ $chambre->type->traduit('libelle') }}</a></h3>
             <span class="room__num">{{ __('site.chambres.numero', ['numero' => $chambre->numero]) }}</span>
         </div>
         <ul class="amen">

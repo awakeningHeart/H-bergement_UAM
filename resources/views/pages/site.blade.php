@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
 @section('titre', $site->nom)
-@section('description', $site->description ?: __('site.hero.texte'))
+@section('description', $site->traduit('description') ?: __('site.hero.texte'))
 
 @section('contenu')
 <div class="wrap">
-    <nav class="crumbs" aria-label="Fil d'Ariane">
+    <nav class="crumbs" aria-label="{{ __('site.fil_ariane') }}">
         <a href="{{ route('accueil') }}">{{ __('site.ville.accueil') }}</a> <span>›</span>
         <a href="{{ route('ville', $ville) }}">{{ $ville->nom }}</a> <span>›</span> <span>{{ $site->nom }}</span>
     </nav>
@@ -30,11 +30,11 @@
             @endif
         </div>
         <div class="panel">
-            @if ($site->description)
-                <p class="info-line">{{ $site->description }}</p>
+            @if ($site->traduit('description'))
+                <p class="info-line">{{ $site->traduit('description') }}</p>
             @endif
-            @if ($site->adresse)
-                <p class="info-line"><b>{{ __('site.site.adresse') }}</b> : {{ $site->adresse }}</p>
+            @if ($site->traduit('adresse'))
+                <p class="info-line"><b>{{ __('site.site.adresse') }}</b> : {{ $site->traduit('adresse') }}</p>
             @endif
             @if ($site->telephone)
                 <p class="info-line"><b>{{ __('site.site.telephone') }}</b> : {{ $site->telephone }}</p>

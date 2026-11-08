@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\Audite;
+use App\Models\Concerns\Traduisible;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Site extends Model
 {
-    use Audite, HasFactory, SoftDeletes;
+    use Audite, HasFactory, SoftDeletes, Traduisible;
 
     protected $table = 'sites';
 

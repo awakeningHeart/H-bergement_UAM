@@ -27,10 +27,12 @@ class SiteForm
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug((string) $state))),
                 TextInput::make('slug')->label('Identifiant (URL)')->required()->unique(ignoreRecord: true)->maxLength(255),
                 TextInput::make('adresse')->label('Adresse')->maxLength(255),
+                TextInput::make('adresse_en')->label('Adresse en anglais')->helperText('Facultatif : à défaut, l\'adresse française est affichée.')->maxLength(255),
                 TextInput::make('telephone')->label('Téléphone')->tel()->maxLength(20),
                 TextInput::make('latitude')->label('Latitude')->numeric()->minValue(-90)->maxValue(90),
                 TextInput::make('longitude')->label('Longitude')->numeric()->minValue(-180)->maxValue(180),
                 Textarea::make('description')->label('Description')->columnSpanFull(),
+                Textarea::make('description_en')->label('Description en anglais')->helperText('Facultatif : à défaut, la description française est affichée.')->columnSpanFull(),
                 Select::make('personnel')
                     ->label('Personnel affecté (gestionnaires)')
                     ->relationship('personnel', 'name')

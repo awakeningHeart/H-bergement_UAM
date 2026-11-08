@@ -18,6 +18,7 @@ use App\Services\HoldService;
 use App\Services\OtpService;
 use App\Services\PricingService;
 use App\Services\ReservationService;
+use App\Support\Format;
 use App\Support\Telephone;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\RateLimiter;
@@ -378,7 +379,7 @@ class ReservationModal extends Component
             'restant' => $restant,
             'tarifsRepas' => TarifRepas::query()->get()->keyBy(fn ($t) => $t->repas->value),
             'organismes' => $this->etape === 3 ? Organisme::query()->orderBy('nom')->get() : collect(),
-            'heureDepart' => sprintf('%02dh00', app(AvailabilityService::class)->heureDepart()),
+            'heureDepart' => Format::heure(app(AvailabilityService::class)->heureDepart()),
             'delaiPaiement' => (int) Parametre::valeur('delai_paiement_heures', config('uam.payment_deadline_hours')),
             'tauxTva' => rtrim(rtrim(number_format(app(PricingService::class)->tauxTva(), 2, ',', ''), '0'), ','),
             'nuitees' => $this->devis['nuitees'] ?? 0,

@@ -4,7 +4,7 @@
 
 @section('contenu')
 <div class="wrap">
-    <nav class="crumbs" aria-label="Fil d'Ariane">
+    <nav class="crumbs" aria-label="{{ __('site.fil_ariane') }}">
         <a href="{{ route('accueil') }}">{{ __('site.ville.accueil') }}</a> <span>›</span> <span>{{ $ville->nom }}</span>
     </nav>
     <div class="page-head">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="room__body">
                     <h3>{{ $s->nom }}</h3>
-                    <p>{{ $s->adresse }}</p>
+                    <p>{{ $s->traduit('adresse') }}</p>
                     <p>{{ __('site.carte.chambres', ['n' => $s->chambres_count]) }}</p>
                 </div>
             </a>
@@ -41,7 +41,7 @@
                         <span class="map-item__dot"></span>
                         <span>
                             <span class="map-item__name">{{ $s->nom }}</span>
-                            <span class="map-item__addr">{{ $s->adresse }}</span>
+                            <span class="map-item__addr">{{ $s->traduit('adresse') }}</span>
                         </span>
                         <span class="map-item__rooms">{{ __('site.carte.chambres', ['n' => $s->chambres_count]) }}</span>
                     </button>

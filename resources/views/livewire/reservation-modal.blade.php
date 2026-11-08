@@ -18,7 +18,7 @@
                     @if ($chambre)
                         <span>{{ $chambre->site->ville->nom }}</span><span class="dim">·</span>
                         <span>{{ $chambre->site->nom }}</span><span class="dim">·</span>
-                        <span class="modal__room" id="modal-titre">{{ $chambre->type->libelle }} — {{ __('site.chambres.numero', ['numero' => $chambre->numero]) }}</span>
+                        <span class="modal__room" id="modal-titre">{{ $chambre->type->traduit('libelle') }} — {{ __('site.chambres.numero', ['numero' => $chambre->numero]) }}</span>
                         @if ($devis)
                             <span class="dim">·</span><span class="white">{{ __('reservation.modal.prix', ['prix' => \App\Support\Format::nombre($devis['prix_nuit'])]) }}</span>
                         @endif
