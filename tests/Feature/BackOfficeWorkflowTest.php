@@ -150,6 +150,11 @@ it('calcule le taux d\'occupation, les arrivées et les revenus, limités aux si
     $autreSite = Site::factory()->create();
     $b = Chambre::factory()->create(['site_id' => $autreSite->id]);
     $tz = 'Africa/Niamey';
+    // La réservation du beforeEach a une date aléatoire : on la fixe dans le mois, hors du jour courant.
+    $this->resa->update([
+        'arrivee' => CarbonImmutable::parse('2026-11-05 14:00', $tz)->utc(),
+        'depart' => CarbonImmutable::parse('2026-11-07 12:00', $tz)->utc(),
+    ]);
 
     $mienne = Reservation::factory()->statut(StatutReservation::Confirmee)->create([
         'chambre_id' => $a->id,
