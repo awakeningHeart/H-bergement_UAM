@@ -7,7 +7,16 @@
         <span>{{ __('site.topbar') }}</span>
         <div class="topbar__right">
             <span>{{ $telephone }}</span>
-            <span class="lang" aria-label="Langue"><b>FR</b> <span>/</span> <span title="{{ __('site.en_bientot') }}">EN</span></span>
+            <span class="lang" role="group" aria-label="{{ __('site.langue') }}">
+                @foreach (config('uam.langues') as $langue)
+                    @if (! $loop->first)<span aria-hidden="true">/</span>@endif
+                    @if ($langue === app()->getLocale())
+                        <b lang="{{ $langue }}" aria-current="true">{{ strtoupper($langue) }}</b>
+                    @else
+                        <a href="{{ route('langue', $langue) }}" lang="{{ $langue }}" hreflang="{{ $langue }}" rel="nofollow">{{ strtoupper($langue) }}</a>
+                    @endif
+                @endforeach
+            </span>
             <a href="{{ route('accueil') }}#suivi">{{ __('site.suivre') }}</a>
         </div>
     </div>

@@ -20,9 +20,4 @@ class StoreReservationRequest extends FormRequest
             'idempotence' => ['nullable', 'string', 'max:100'],
         ];
     }
-
-    public function messages(): array
-    {
-        return (new SejourRequest)->messages() + (new FacturationRequest)->messages();
-    }
 }

@@ -15,18 +15,10 @@ enum StatutReservation: string
     case Terminee = 'terminee';
     case NonPresente = 'non_presente';
 
-    public function libelle(): string
+    /** Libellé traduit (lang/fr|en/enums.php) ; $langue force une langue, par ex. « fr » pour le journal d'audit. */
+    public function libelle(?string $langue = null): string
     {
-        return match ($this) {
-            self::EnAttente => 'En attente',
-            self::Confirmee => 'Confirmée',
-            self::Refusee => 'Refusée',
-            self::Expiree => 'Expirée',
-            self::Annulee => 'Annulée',
-            self::EnCours => 'En cours',
-            self::Terminee => 'Terminée',
-            self::NonPresente => 'Non présenté',
-        };
+        return __('enums.statut.'.$this->value, [], $langue);
     }
 
     public function couleur(): string

@@ -37,12 +37,4 @@ class FacturationRequest extends FormRequest
     {
         return self::regles();
     }
-
-    public function messages(): array
-    {
-        return [
-            'conditions.accepted' => 'Vous devez accepter les conditions pour confirmer.',
-            'organisme_id.required_if' => 'Choisissez l\'organisme qui prend en charge la facture.',
-        ];
-    }
 }

@@ -77,7 +77,12 @@ return [
             'numero_piece' => 'N° de pièce',
             'piece_delivree_le' => 'Délivrée le',
             'email' => 'E-mail',
-            'pieces' => ['Passeport', 'Carte d\'identité', 'Permis de conduire', 'Autre'],
+            'pieces' => [
+                'Passeport' => 'Passeport',
+                'Carte d\'identité' => 'Carte d\'identité',
+                'Permis de conduire' => 'Permis de conduire',
+                'Autre' => 'Autre',
+            ],
         ],
 
         'e2' => [

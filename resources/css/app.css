@@ -60,6 +60,8 @@ input:focus, select:focus { outline: none; border-color: var(--bleu) !important;
 .topbar a:hover { color: #fff; }
 .topbar .lang b { color: #fff; font-weight: 500; }
 .topbar .lang span { opacity: .5; }
+.topbar .lang a { color: inherit; opacity: .7; }
+.topbar .lang a:hover, .topbar .lang a:focus-visible { opacity: 1; }
 
 .navbar { position: sticky; top: 0; z-index: 500; background: var(--fond); border-bottom: 1px solid var(--filet); }
 .navbar__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 6px; padding-bottom: 6px; }

@@ -84,6 +84,7 @@ return [
 
     'pied' => [
         'service' => 'Rectorat · DAIG',
+        'service_detail' => 'Service des Affaires Intérieures : Maisons d\'hôtes',
         'contact' => 'Contact',
         'savoir' => 'À savoir',
         'depart' => 'Départ au plus tard à :heure',
@@ -118,5 +119,5 @@ return [
     ],
 
     'photo_a_venir' => 'Photo à venir',
-    'en_bientot' => 'Bientôt disponible',
+    'langue' => 'Langue',
 ];

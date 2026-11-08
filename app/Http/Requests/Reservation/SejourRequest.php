@@ -36,12 +36,4 @@ class SejourRequest extends FormRequest
     {
         return self::regles();
     }
-
-    public function messages(): array
-    {
-        return [
-            'arrivee.after_or_equal' => 'La date d\'arrivée ne peut pas être dans le passé.',
-            'depart.after' => 'La date de départ doit être postérieure à la date d\'arrivée.',
-        ];
-    }
 }

@@ -102,8 +102,9 @@
                             <label class="field"><span class="lbl">{{ __('reservation.modal.e1.type_piece') }}</span>
                                 <select wire:model="type_piece">
                                     <option value=""></option>
-                                    @foreach (__('reservation.modal.e1.pieces') as $piece)
-                                        <option value="{{ $piece }}">{{ $piece }}</option>
+                                    {{-- Valeur enregistrée en français (lue par le personnel), libellé dans la langue du visiteur. --}}
+                                    @foreach (__('reservation.modal.e1.pieces') as $valeur => $piece)
+                                        <option value="{{ $valeur }}">{{ $piece }}</option>
                                     @endforeach
                                 </select></label>
                             <label class="field"><span class="lbl">{{ __('reservation.modal.e1.numero_piece') }}</span>

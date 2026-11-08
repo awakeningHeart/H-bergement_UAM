@@ -12,14 +12,9 @@ enum Motif: string
     case EnseignantVisiteur = 'enseignant_visiteur';
     case Autre = 'autre';
 
-    public function libelle(): string
+    /** Libellé traduit (lang/fr|en/enums.php) ; $langue force une langue, par ex. « fr » pour le journal d'audit. */
+    public function libelle(?string $langue = null): string
     {
-        return match ($this) {
-            self::Mission => 'Mission',
-            self::Colloque => 'Colloque',
-            self::Jury => 'Jury',
-            self::EnseignantVisiteur => 'Enseignant visiteur',
-            self::Autre => 'Autre',
-        };
+        return __('enums.motif.'.$this->value, [], $langue);
     }
 }

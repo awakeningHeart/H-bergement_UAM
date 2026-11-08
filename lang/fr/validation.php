@@ -28,6 +28,14 @@ return [
     'string' => 'Le champ :attribute doit être une chaîne de caractères.',
     'unique' => 'Cette valeur de :attribute est déjà utilisée.',
 
+    // Messages propres à un champ (recherche, formulaire de réservation, API).
+    'custom' => [
+        'arrivee' => ['after_or_equal' => 'La date d\'arrivée ne peut pas être dans le passé.'],
+        'depart' => ['after' => 'La date de départ doit être postérieure à la date d\'arrivée.'],
+        'conditions' => ['accepted' => 'Vous devez accepter les conditions pour confirmer.'],
+        'organisme_id' => ['required_if' => 'Choisissez l\'organisme qui prend en charge la facture.'],
+    ],
+
     'attributes' => [
         'telephone' => 'téléphone',
         'nom' => 'nom',

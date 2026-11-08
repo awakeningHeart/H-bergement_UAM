@@ -4,6 +4,9 @@ return [
     // Stockage en UTC (config app.timezone) ; affichage et règles métier en heure de Niamey.
     'timezone' => env('UAM_TIMEZONE', 'Africa/Niamey'),
 
+    // Langues du site public (la première est la langue par défaut ; le back-office reste en français).
+    'langues' => ['fr', 'en'],
+
     'currency' => env('CURRENCY', 'FCFA'),
     'tva_rate' => (float) env('TVA_RATE', 0),
     'checkout_hour' => (int) env('CHECKOUT_HOUR', 12),

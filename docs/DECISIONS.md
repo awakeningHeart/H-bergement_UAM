@@ -90,3 +90,11 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Saturation des chambres** : `POST /api/holds` et le formulaire sont publics. Plafond de 3 holds actifs par adresse IP (empreinte SHA-256 salée par la clé d'application), hors celui que le visiteur remplace. Derrière un proxy inverse, déclarer les proxys de confiance pour que l'IP soit la vraie.
 - **Téléversements** : JPEG, PNG, WebP uniquement (pas de SVG servi depuis le domaine de l'application).
 - **Constats sans changement** : aucune sortie Blade non échappée (`{!! !!}`), requêtes brutes uniquement statiques, aucune lecture de `env()` hors configuration, annulation de suivi limitée au téléphone vérifié.
+
+## D11 — Interface anglaise (P2, 8 novembre 2026)
+- **Choix de la langue** : liens FR / EN dans le bandeau supérieur (`GET /langue/{fr|en}`), langue gardée en session ; français par défaut. Le retour se fait vers la page d'origine uniquement si elle appartient à l'application (pas de redirection ouverte). Pas de préfixe `/en` dans les adresses.
+- **Périmètre traduit** : site public, formulaire de réservation (Livewire, langue conservée lors des actions grâce au middleware persistant), suivi, API publique, messages de validation, SMS envoyés pendant la visite (code OTP, accusé de réception de la demande).
+- **Restent en français** : back-office, journal d'audit (libellés forcés en français), fiche PDF et factures (documents officiels), SMS envoyés par le personnel (confirmation, refus, expiration, annulation). Une clé sans traduction anglaise retombe sur le français.
+- **Contenu saisi en base** (noms des villes et sites, types de chambre, descriptions, équipements, conditions générales) : affiché tel quel, en français ; pas de champs bilingues.
+- **Type de pièce** : la valeur enregistrée reste en français (lue par le personnel), seul le libellé affiché est traduit.
+- Les messages propres à un champ (dates, conditions, organisme) passent des Form Requests à `lang/*/validation.php` (`custom`) : ils s'appliquent désormais aussi au formulaire Livewire.

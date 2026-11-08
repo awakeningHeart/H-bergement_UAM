@@ -10,12 +10,9 @@ enum Repas: string
     case Dejeuner = 'dejeuner';
     case Diner = 'diner';
 
-    public function libelle(): string
+    /** Libellé traduit (lang/fr|en/enums.php) ; $langue force une langue, par ex. « fr » pour le journal d'audit. */
+    public function libelle(?string $langue = null): string
     {
-        return match ($this) {
-            self::PetitDejeuner => 'Petit-déjeuner',
-            self::Dejeuner => 'Déjeuner',
-            self::Diner => 'Dîner',
-        };
+        return __('enums.repas.'.$this->value, [], $langue);
     }
 }

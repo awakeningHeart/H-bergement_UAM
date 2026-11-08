@@ -61,7 +61,7 @@ class ReservationWorkflow
                 ->causedBy($acteur)
                 ->event('statut')
                 ->withProperties(['de' => $origine->value, 'vers' => $cible->value, 'motif' => $motif])
-                ->log(__('reservation.workflow.journal', ['de' => $origine->libelle(), 'vers' => $cible->libelle()]));
+                ->log(__('reservation.workflow.journal', ['de' => $origine->libelle('fr'), 'vers' => $cible->libelle('fr')], 'fr'));
         });
 
         if ($notifier) {

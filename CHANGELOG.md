@@ -64,3 +64,15 @@
 - Nouveau logo à fond transparent (`logo-uam-transparent.png`) sur le site public (barre, pied, favicon), le back-office et les PDF (fiche, facture) ; marges du logo ajustées.
 ### Qualité
 - Test du tableau de bord rendu déterministe (date de la réservation de base fixée dans le mois).
+
+## [Interface anglaise (P2)] - 2026-11-08
+### Ajouté
+- Sélecteur FR / EN dans le bandeau supérieur (langue gardée en session, français par défaut) ; fichiers `lang/en` (site, réservation, statuts et repas, validation).
+- Site public, formulaire de réservation, suivi, messages d'erreur et SMS de la visite (code, accusé de réception) en anglais.
+- 8 tests (changement de langue, redirection sûre, back-office en français, formulaire en anglais, journal en français).
+### Modifié
+- Libellés des statuts, motifs et repas lus depuis `lang/*/enums.php` ; le journal d'audit reste en français.
+- Messages de validation propres à un champ déplacés dans `lang/*/validation.php` (appliqués aussi au formulaire Livewire).
+- Langue par défaut de l'application : `fr` (même sans `APP_LOCALE`).
+### Restent en français
+- Back-office, fiche PDF, factures, SMS envoyés par le personnel, contenus saisis en base (noms, descriptions, équipements).

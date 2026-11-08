@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\DefinirLangue;
 use App\Services\Sms\LogSmsGateway;
 use App\Services\Sms\NullSmsGateway;
 use App\Services\Sms\SmsGateway;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         FilamentTimezone::set(config('uam.timezone'));
 
         Model::preventLazyLoading(! $this->app->isProduction());
+
+        // Les actions Livewire (formulaire de réservation, suivi) gardent la langue de la page d'origine.
+        Livewire::addPersistentMiddleware([DefinirLangue::class]);
 
         RateLimiter::for('catalogue', fn (Request $request) => Limit::perMinute(60)->by($request->ip()));
         // Protection contre l'énumération de numéros et le détournement de SMS (docs/04-parcours-et-api.md).

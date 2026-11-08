@@ -34,14 +34,6 @@ class RechercheRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'arrivee.after_or_equal' => 'La date d\'arrivée ne peut pas être dans le passé.',
-            'depart.after' => 'La date de départ doit être postérieure à la date d\'arrivée.',
-        ];
-    }
-
     public function arrivee(): CarbonImmutable
     {
         return CarbonImmutable::parse($this->validated('arrivee') ?? now(config('uam.timezone'))->toDateString(), config('uam.timezone'));

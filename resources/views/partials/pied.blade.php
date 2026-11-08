@@ -15,7 +15,7 @@
         </div>
         <div class="footer__col">
             <b>{{ __('site.pied.service') }}</b>
-            <span>Service des Affaires Intérieures : Maisons d'hôtes</span>
+            <span>{{ __('site.pied.service_detail') }}</span>
             <span>{{ $param('facturation_adresse', 'BP 10896/237 Niamey, Niger') }}</span>
         </div>
         <div class="footer__col">
