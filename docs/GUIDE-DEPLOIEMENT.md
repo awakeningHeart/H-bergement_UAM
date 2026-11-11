@@ -55,9 +55,9 @@ SESSION_SECURE_COOKIE=true                  # cookies HTTPS uniquement
 SESSION_SAME_SITE=lax
 HOLDS_MAX_PAR_IP=3                          # chambres qu un meme visiteur peut bloquer a la fois
 
-SMS_DRIVER=log                              # log | null | <fournisseur> (voir §7)
+SMS_DRIVER=log
 SMS_SENDER=UAM
-TVA_RATE=0                                  # à confirmer par l'UAM (paramètre modifiable en back-office)
+TVA_RATE=0
 ADMIN_EMAIL=<e-mail de l'administrateur>
 ADMIN_PASSWORD=<mot de passe fort>          # utilisé une seule fois par le seeder
 ```
