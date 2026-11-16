@@ -10,6 +10,22 @@ RUN npm run build
 
 FROM php:8.4-apache
 
+# Valeurs par défaut de la démonstration (remplacées par celles saisies dans l'hébergeur, le cas échéant).
+ENV APP_ENV=production \
+    APP_DEBUG=false \
+    APP_LOCALE=fr \
+    APP_FALLBACK_LOCALE=fr \
+    LOG_CHANNEL=stderr \
+    LOG_LEVEL=info \
+    TRUSTED_PROXIES=* \
+    DB_CONNECTION=mysql \
+    SESSION_DRIVER=database \
+    SESSION_SECURE_COOKIE=true \
+    CACHE_STORE=database \
+    QUEUE_CONNECTION=sync \
+    SMS_DRIVER=log \
+    DEMO_RESERVATIONS=true
+
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN install-php-extensions pdo_mysql gd intl zip bcmath exif opcache \
     && a2enmod rewrite headers

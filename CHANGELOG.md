@@ -91,3 +91,4 @@
 - Variable `TRUSTED_PROXIES` : derrière un proxy inverse, adresses IP réelles et liens en HTTPS.
 ### Vérifié
 - Image construite et démarrée localement contre une base MySQL exigeant une clé primaire sur chaque table (comme Aiven) : migrations, données de démonstration, pages publiques, liens HTTPS derrière proxy, connexion au back-office, redémarrage sans doublon.
+- Image de démonstration : valeurs par défaut intégrées (journaux visibles dans l'hébergeur, file synchrone, proxy de confiance, SMS simulés, données de démonstration) et vérification de `APP_KEY` au démarrage (message clair au lieu d'une erreur 500).

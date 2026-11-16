@@ -41,7 +41,8 @@ Copier la valeur affichée (`base64:…`). Ne pas la publier.
 | `ADMIN_EMAIL` | l'adresse de connexion au back-office |
 | `ADMIN_PASSWORD` | un mot de passe solide (12 caractères ou plus) |
 
-4. Valider. La première construction prend 5 à 10 minutes. Au démarrage, le site crée les tables et les données de démonstration.
+   Dans **Environment**, chaque variable a deux champs : **Key** = le nom (ex. `APP_KEY`), **Value** = la valeur complète (ex. `base64:…`). Si le service a été créé sans *Blueprint* (**New** → **Web Service**), ajouter à la main ces dix variables : les autres réglages sont fournis par l'image.
+4. Valider. La première construction prend 5 à 10 minutes. Si `APP_KEY` est absente ou mal recopiée, le déploiement échoue avec un message « ERREUR : APP_KEY… » dans les journaux. Au démarrage, le site crée les tables et les données de démonstration.
 5. Si l'adresse attribuée diffère, corriger `APP_URL` dans **Environment** : Render redémarre le site.
 
 ## 4. Partager
