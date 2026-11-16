@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [EnTetesSecurite::class]);
+        // Derrière un proxy inverse (hébergeur, Nginx) : adresses IP réelles et HTTPS. Vide = aucun proxy de confiance.
+        if ($proxies = env('TRUSTED_PROXIES')) {
+            $middleware->trustProxies(at: $proxies === '*' ? '*' : explode(',', $proxies));
+        }
         // Le personnel non connecté (ex. scan d'un QR code) est renvoyé vers la connexion du back-office.
         $middleware->redirectGuestsTo(fn () => route('filament.admin.auth.login'));
     })

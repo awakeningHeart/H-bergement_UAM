@@ -84,3 +84,10 @@
 - Formulaire de réservation : bouton de fermeture × en haut à droite (zone de 44 px, libellé « Fermer » / « Close » pour les lecteurs d'écran), en plus de « Changer de chambre » et de la touche Échap ; la chambre bloquée est libérée à la fermeture.
 - Compte à rebours du blocage de chambre : « Chambre bloquée pour vous · 14:21 » (au lieu de « Réservée », trompeur), avec l'infobulle « Sans confirmation dans ce délai, la chambre sera libérée. », aussi lue par les lecteurs d'écran.
 - Logo du pied de page à la même taille et au même alignement que celui de l'en-tête (92 px, 76 px sur mobile).
+
+## [Démonstration en ligne] - 2026-11-16
+### Ajouté
+- Mise en ligne de démonstration gratuite sur Render avec une base MySQL Aiven : `Dockerfile` (PHP 8.4 + Apache), script de démarrage (migrations, données de démonstration, planificateur), `render.yaml`, guide `docs/DEMO-EN-LIGNE.md`.
+- Variable `TRUSTED_PROXIES` : derrière un proxy inverse, adresses IP réelles et liens en HTTPS.
+### Vérifié
+- Image construite et démarrée localement contre une base MySQL exigeant une clé primaire sur chaque table (comme Aiven) : migrations, données de démonstration, pages publiques, liens HTTPS derrière proxy, connexion au back-office, redémarrage sans doublon.

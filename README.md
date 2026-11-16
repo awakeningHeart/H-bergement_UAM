@@ -48,4 +48,5 @@ php artisan schedule:work     # tâches planifiées (en production : cron)
 - `docs/DECISIONS.md` : choix techniques et fonctionnels.
 - `docs/GUIDE-DEPLOIEMENT.md` et `docs/GUIDE-UTILISATEUR.md`.
 - `docs/PV-RECETTE.md` : procès-verbal de recette.
+- `docs/DEMO-EN-LIGNE.md` : mise en ligne de démonstration gratuite (Render + Aiven).
 - `CHANGELOG.md` : historique des versions.

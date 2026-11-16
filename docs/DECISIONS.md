@@ -99,3 +99,9 @@ Conteneur Docker `uam-mysql` (mysql:8.4 LTS, volume `uam-mysql-data`), lié à `
 - **Heure** : « 12h00 » en français, « 12:00 » en anglais (`Format::heure`).
 - **Type de pièce** : la valeur enregistrée reste en français (lue par le personnel), seul le libellé affiché est traduit.
 - Les messages propres à un champ (dates, conditions, organisme) passent des Form Requests à `lang/*/validation.php` (`custom`) : ils s'appliquent désormais aussi au formulaire Livewire.
+
+## D12 — Démonstration en ligne (16 novembre 2026)
+- Hébergement de démonstration gratuit : Render (conteneur Docker, offre gratuite, mise en veille après 15 min) + Aiven MySQL (offre gratuite annoncée jusqu'au 21/12/2026). Ce n'est pas l'hébergement de production.
+- Au démarrage : `config/route/view:cache`, migrations, seeders (idempotents) et réservations fictives si `DEMO_RESERVATIONS=true`, planificateur via `schedule:work` ; file d'attente en `sync` ; journaux sur la sortie d'erreur (les SMS simulés, codes compris, apparaissent dans les journaux Render).
+- `TRUSTED_PROXIES` lu par `env()` dans `bootstrap/app.php` (la configuration n'est pas encore chargée à cet endroit) ; vide par défaut : aucun proxy de confiance.
+- Disque non persistant : les photos téléversées sont perdues au redémarrage ; les PDF de factures sont régénérés depuis les données figées.
